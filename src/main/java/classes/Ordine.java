@@ -6,6 +6,7 @@ import java.sql.Time;
 import java.util.Collection;
 
 public class Ordine {
+
     private int IdOrdine;
 
     private Time FasciaOraria;
@@ -26,6 +27,40 @@ public class Ordine {
     private Cliente cliente;
 
     private StatoOrdine statoOrdine;
+
+    public int getIdOrdine() {
+        return IdOrdine;
+    }
+
+    public void setIdOrdine(int idOrdine) {
+        IdOrdine = idOrdine;
+    }
+
+    public Time getFasciaOraria() {
+        return FasciaOraria;
+    }
+
+    public boolean isTipoPagamento() {
+        return TipoPagamento;
+    }
+
+    public int getStato() {
+        return Stato;
+    }
+
+    public void setStato(int stato) {
+        Stato = stato;
+    }
+
+    public Ordine() {
+    }
+
+    public Ordine(int idOrdine, Time fasciaOraria, boolean tipoPagamento, int stato) {
+        IdOrdine = idOrdine;
+        FasciaOraria = fasciaOraria;
+        TipoPagamento = tipoPagamento;
+        Stato = stato;
+    }
 
     public Ordine newOrdine() {
         return null;

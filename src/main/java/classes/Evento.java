@@ -7,6 +7,14 @@ public class Evento {
 
 	private Collection<Prenotazione> mapUserPrenotazioni;
 
+	public Collection<Prenotazione> getMapUserPrenotazioni() {
+		return mapUserPrenotazioni;
+	}
+
+	public void setMapUserPrenotazioni(Collection<Prenotazione> mapUserPrenotazioni) {
+		this.mapUserPrenotazioni = mapUserPrenotazioni;
+	}
+
 	private QLessFood qLessFood;
 
 	public Evento newEvento(String Nome, Date Data, int PostiTotali, double Prezzo, int Sconto) {
