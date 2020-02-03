@@ -1,5 +1,6 @@
 import classes.Cliente;
 import classes.MenuPasto;
+import classes.Portata;
 import classes.QLessFood;
 
 import java.io.BufferedReader;
@@ -7,10 +8,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class QLFApplication {
 
@@ -96,6 +94,7 @@ public class QLFApplication {
                                         continue;
 
                                     case 2: //ricerca
+
                                         System.out.println("--- Ricerca Menu Pasto ---");
                                         System.out.println("Inserisci Tipologia del Pasto da ricercare[0: PRANZO | 1: CENA]");
                                         int tipo = scannerIO.nextInt();
@@ -109,19 +108,58 @@ public class QLFApplication {
 
                                     case 3: // modifica
 
+                                        System.out.println("--- Modifica Menu Pasto ---");
+                                        System.out.println("Inserisci Tipologia del Pasto da ricercare[0: PRANZO | 1: CENA]");
+                                        int tipos = scannerIO.nextInt();
+                                        System.out.println("Inserisci Data del Pasto da ricercare: [dd/MM/yyyy]");
+                                        String datass = in.readLine();
+                                        Date dates =new SimpleDateFormat("dd/MM/yyyy").parse(datass);
+                                        MenuPasto ricercaMod = qLessFood.ricercaMenu(dates, tipos);
+                                        System.out.println("Cosa vuoi modificare?");
+                                        System.out.println("1. Dati del Menu");
+                                        System.out.println("2. Dati delle portate del Menu");
+                                        String m = in.readLine();
+
+                                        if(m=="1"){ //modifico i dati del menu
+                                            //new Data, new Tipologia, new Prezzo
+                                            System.out.println("Inserisci nuova tipologia [0:PRANZO | 1: CENA]");
+                                            int newTipologia = scannerIO.nextInt();
+                                            System.out.println("Inserisci nuova Data:[dd/MM/yyyy]");
+                                            String newData = in.readLine();
+                                            Date newDate =new SimpleDateFormat("dd/MM/yyyy").parse(newData);
+                                            System.out.println("Inserisci nuovo Prezzo: ");
+                                            double newPrezzo = scannerIO.nextDouble();
+                                            qLessFood.modificaMenu(ricercaMod, newDate, newTipologia, newPrezzo);
+
+                                        }
+                                        else if(m=="2"){//modifico i dati delle portate
+                                            ArrayList<Portata> listportate = (ArrayList<Portata>) ricercaMod.getListPortate();
+                                            System.out.println("Queste sono le portate del Menu: "+ listportate);
+                                            System.out.println("Inserire id della portata: ");
+                                            int oldId = scannerIO.nextInt();
+                                            System.out.println("Inserire tipo della nuova portata: ");
+                                            int newTipo = scannerIO.nextInt();
+                                            System.out.println("Inserire descrizione della nuova portata: ");
+                                            String newDescr = in.readLine();
+                                            qLessFood.modificaDatiPortata(oldId, newTipo, newDescr);
+                                        }
+
+
                                     case 4: // elimina
+
                                         System.out.println("--- Elimina Menu Pasto ---");
                                         System.out.println("Inserisci Tipologia del Pasto da eliminare[0: PRANZO | 1: CENA]");
                                         int t = scannerIO.nextInt();
                                         System.out.println("Inserisci Data del Pasto da eliminare: [dd/MM/yyyy]");
                                         String datas = in.readLine();
-                                        Date datass =new SimpleDateFormat("dd/MM/yyyy").parse(datas);
-                                        MenuPasto ricerca = qLessFood.ricercaMenu(datass, t);
-                                        qLessFood.eliminaMenu();
+                                        Date datasss =new SimpleDateFormat("dd/MM/yyyy").parse(datas);
+                                        MenuPasto ricerca = qLessFood.ricercaMenu(datasss, t);
+                                        qLessFood.eliminaMenu(ricerca);
+                                        System.out.println("Eliminazione avvenuta.");
 
 
                                     case 5: //esci
-                                        System.exit(0);
+                                        continue;
 
                                 }//end scelta menu
 
