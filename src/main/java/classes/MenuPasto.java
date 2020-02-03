@@ -1,10 +1,6 @@
 package classes;
 
-import java.sql.Time;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 public class MenuPasto {
 
@@ -83,12 +79,28 @@ public class MenuPasto {
 		return false;
 	}
 
-	public void addPortata(Portata p) {
 
+	public boolean updatePortata(int IdPortataOld, int newTipo, String newDescrizione) {
+		Portata newPortata = new Portata(newTipo, newDescrizione);
+		int index = 0;
+		Portata oldPortata = null;
+		for (Portata portata : listPortate) {
+			if (portata.getIdPortata() == IdPortataOld) {
+				oldPortata = listPortate.get(index);
+				break;
+			}
+			index++;
+		}
+
+		return Collections.replaceAll(listPortate, oldPortata, newPortata);
 	}
 
-	public boolean removeMenu() {
+	public boolean removePortata(int IdPortata) {
+		for(Portata portata : listPortate){
+			if(portata.getIdPortata() == IdPortata){
+				return listPortate.remove(portata);
+			}
+		}
 		return false;
 	}
-
 }

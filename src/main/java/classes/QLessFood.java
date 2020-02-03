@@ -79,21 +79,15 @@ public class QLessFood implements Observer {
 	}
 
 	public void modificaPortata(String SceltaPortata) {
-
 	}
 
 	public boolean eliminaPortata(int IdPortata) {
-		return false;
+		return menuPasto.removePortata(IdPortata);
 	}
 
-	public boolean modificaDatiPortata(int newTipo, String newDescrizione) {
-		return false;
+	public boolean modificaDatiPortata(int IdPortataOld, int newTipo, String newDescrizione) {
+		return menuPasto.updatePortata(IdPortataOld, newTipo, newDescrizione);
 	}
-
-	public boolean updatePortata(int newTipo, String newDescrizione) {
-		return false;
-	}
-
 
 	public boolean removePortata(int IdPortata) {
 		return false;
