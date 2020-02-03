@@ -1,6 +1,8 @@
 package classes;
 
+import java.sql.Time;
 import java.util.Collection;
+import java.util.Date;
 
 public class MenuPasto {
 
@@ -8,13 +10,13 @@ public class MenuPasto {
 
 	}
 
-	public MenuPasto(DateTime data, int tipologia, double prezzo) {
+	public MenuPasto(Time data, int tipologia, double prezzo) {
 		Data = data;
 		Tipologia = tipologia;
 		Prezzo = prezzo;
 	}
 
-	private DateTime Data;
+	private Time Data;
 
 	private int Tipologia;
 
@@ -22,14 +24,8 @@ public class MenuPasto {
 
 	private QLessFood qLessFood;
 
-	private Menù menù;
-
-	public DateTime getData() {
+	public Date getData() {
 		return Data;
-	}
-
-	public void setData(DateTime data) {
-		Data = data;
 	}
 
 	public int getTipologia() {
@@ -48,13 +44,6 @@ public class MenuPasto {
 		Prezzo = prezzo;
 	}
 
-	public Menù getMenù() {
-		return menù;
-	}
-
-	public void setMenù(Collection<Menù> menù) {
-		this.menù = menù;
-	}
 
 	public Collection<Ordine> getOrdine() {
 		return ordine;
@@ -80,21 +69,13 @@ public class MenuPasto {
 		this.qLessFood = qLessFood;
 	}
 
-	public void setMenù(Menù menù) {
-		this.menù = menù;
-	}
-
 	private Collection<Menù> menù;
 
 	private Collection<Ordine> ordine;
 
-	private Portata listPortate {list};
+	private Portata listPortate;
 
-	private QLessFood qLessFood;
-
-	private Collection<Ordine> ordine;
-
-	public MenuPasto newMenu(DateTime Data, int Tipologia, double Prezzo, int ListaIdPortate) {
+	public MenuPasto newMenu(Date Data, int Tipologia, double Prezzo, int ListaIdPortate) {
 		return null;
 	}
 

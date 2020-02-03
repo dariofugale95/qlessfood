@@ -36,11 +36,11 @@ public class Prenotazione {
 		QuantitaRichiesta = quantitaRichiesta;
 	}
 
-	public doucle getPrezzoTotale() {
+	public double getPrezzoTotale() {
 		return PrezzoTotale;
 	}
 
-	public void setPrezzoTotale(doucle prezzoTotale) {
+	public void setPrezzoTotale(double prezzoTotale) {
 		PrezzoTotale = prezzoTotale;
 	}
 }
