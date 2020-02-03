@@ -57,4 +57,59 @@ public class Token implements Observable {
 
 	}
 
+	public Token(int nome, int numPasti) {
+		Nome = nome;
+		NumPasti = numPasti;
+	}
+
+	public Token() {
+	}
+
+	public int getNome() {
+		return Nome;
+	}
+
+	public void setNome(int nome) {
+		Nome = nome;
+	}
+
+	public int getNumPasti() {
+		return NumPasti;
+	}
+
+	public void setNumPasti(int numPasti) {
+		NumPasti = numPasti;
+	}
+
+	public QLessFood getqLessFood() {
+		return qLessFood;
+	}
+
+	public void setqLessFood(QLessFood qLessFood) {
+		this.qLessFood = qLessFood;
+	}
+
+	public Collection<Cliente> getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(Collection<Cliente> cliente) {
+		this.cliente = cliente;
+	}
+
+	public Collection<Ordine> getOrdine() {
+		return ordine;
+	}
+
+	public void setOrdine(Collection<Ordine> ordine) {
+		this.ordine = ordine;
+	}
+
+	public Observable getObservable() {
+		return observable;
+	}
+
+	public void setObservable(Observable observable) {
+		this.observable = observable;
+	}
 }
