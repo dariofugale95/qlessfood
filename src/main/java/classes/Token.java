@@ -1,3 +1,8 @@
+package classes;
+
+import interfaces.Observable;
+import interfaces.Observer;
+
 import java.util.Collection;
 
 public class Token implements Observable {

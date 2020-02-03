@@ -1,4 +1,13 @@
+package classes;
+
+import interfaces.Observable;
+import interfaces.Observer;
+
+import javax.sound.sampled.Port;
+import java.sql.Time;
 import java.util.Collection;
+import java.util.Date;
+import java.util.List;
 
 public class QLessFood implements Observer {
 
@@ -6,19 +15,17 @@ public class QLessFood implements Observer {
 
 	private Collection<MenuPasto> menuPasto;
 
-	private Collection<Ordine> ordine;
-
 	private Ordine ordine;
 
-	private Collection<Ordine> listOrdini {ordered, list};
+	private Collection<Ordine> listOrdini;
 
-	private Collection<MenuPasto> mapMenuPasto {map};
+	private Collection<MenuPasto> mapMenuPasto;
 
-	private Collection<Token> listToken {list};
+	private Collection<Token> listToken;
 
-	private Collection<Cliente> listClienti {list};
+	private Collection<Cliente> listClienti;
 
-	private Collection<Evento> listEventi {list};
+	private Collection<Evento> listEventi;
 
 	private Observer observer;
 
@@ -34,7 +41,7 @@ public class QLessFood implements Observer {
 
 	}
 
-	public void inserisciMenu(DateTime Data, int Tipologia, double Prezzo, int ListaIdPortate) {
+	public void inserisciMenu(Date Data, int Tipologia, double Prezzo, int ListaIdPortate) {
 
 	}
 
@@ -42,11 +49,11 @@ public class QLessFood implements Observer {
 		return 0;
 	}
 
-	public MenuPasto ricercaMenu(DateTime Data, int Tipologia) {
+	public MenuPasto ricercaMenu(Date Data, int Tipologia) {
 		return null;
 	}
 
-	public boolean modificaMenu(DateTime newData, int newTipologia, double newPrezzo) {
+	public boolean modificaMenu(Date newData, int newTipologia, double newPrezzo) {
 		return false;
 	}
 
@@ -82,7 +89,7 @@ public class QLessFood implements Observer {
 		return false;
 	}
 
-	public List_Portate_ nuovoOrdine(DateTime Data, int Tipologia) {
+	public List<Portata> nuovoOrdine(Date Data, int Tipologia) {
 		return null;
 	}
 
@@ -90,7 +97,7 @@ public class QLessFood implements Observer {
 
 	}
 
-	public List_Portate_ getListPortate(DateTime Data, int Tipologia) {
+	public List<Portata> getListPortate(Date Data, int Tipologia) {
 		return null;
 	}
 
@@ -118,7 +125,7 @@ public class QLessFood implements Observer {
 
 	}
 
-	public List_Ordine_ visualizzaOrdiniInPreparazione(int Stato) {
+	public List<Ordine> visualizzaOrdiniInPreparazione(int Stato) {
 		return null;
 	}
 
@@ -166,10 +173,6 @@ public class QLessFood implements Observer {
 		return false;
 	}
 
-	public void confermaDatiToken() {
-
-	}
-
 	public boolean eliminaToken() {
 		return false;
 	}
@@ -214,7 +217,7 @@ public class QLessFood implements Observer {
 
 	}
 
-	public boolean inserisciDatiEvento(String Nome, DateTime Data, int PostiTotali, double Prezzo, int Sconto) {
+	public boolean inserisciDatiEvento(String Nome, Date Data, int PostiTotali, double Prezzo, int Sconto) {
 		return false;
 	}
 
@@ -222,7 +225,7 @@ public class QLessFood implements Observer {
 		return 0;
 	}
 
-	public Evento ricercaEvento(DateTime Data) {
+	public Evento ricercaEvento(Date Data) {
 		return null;
 	}
 
@@ -230,7 +233,7 @@ public class QLessFood implements Observer {
 		return false;
 	}
 
-	public void selezionaEvento(DateTime Data) {
+	public void selezionaEvento(Date Data) {
 
 	}
 
@@ -242,7 +245,7 @@ public class QLessFood implements Observer {
 		return 0;
 	}
 
-	public void ricercaPrenotazioniEvento(DateTime DataEvento) {
+	public void ricercaPrenotazioniEvento(Date DataEvento) {
 
 	}
 
@@ -258,8 +261,8 @@ public class QLessFood implements Observer {
 	/**
 	 * @see 4-DCD - DiagrammaClassiProgetto.Observer#update(4-DCD - DiagrammaClassiProgetto.Observable, Object)
 	 */
+
 	public void update(Observable o, Object arg) {
 
 	}
-
 }

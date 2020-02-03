@@ -1,3 +1,5 @@
+package classes;
+
 public class Prenotazione {
 
 	private Cliente cliente;
