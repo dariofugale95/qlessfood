@@ -203,8 +203,8 @@ public class QLessFood implements Observer {
 	}
 
 	public int confermaDatiCliente(Cliente c) {
-		Cliente temp = new Cliente(c.getUsername(), c.getPassword(), c.getEmail());
-		listClienti.add(temp);
+
+		listClienti.add(c);
 		return 1;
 	}
 
