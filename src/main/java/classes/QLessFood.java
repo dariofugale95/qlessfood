@@ -14,8 +14,6 @@ public class QLessFood implements Observer {
 	private static QLessFood qLessFood; //intanze singleton
 
 
-
-
 	private Collection<MenuPasto> menuPasto;
 
 	private Ordine ordine;
@@ -26,7 +24,11 @@ public class QLessFood implements Observer {
 
 	private Collection<Token> listToken;
 
-	private Collection<Cliente> listClienti;
+	public List<Cliente> listClienti;
+
+
+
+
 
 	private Collection<Evento> listEventi;
 
@@ -200,8 +202,10 @@ public class QLessFood implements Observer {
 		return false;
 	}
 
-	public int confermaDatiCliente() {
-		return 0;
+	public int confermaDatiCliente(Cliente c) {
+		Cliente temp = new Cliente(c.getUsername(), c.getPassword(), c.getEmail());
+		listClienti.add(temp);
+		return 1;
 	}
 
 
