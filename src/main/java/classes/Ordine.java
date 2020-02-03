@@ -3,6 +3,7 @@ package classes;
 import interfaces.StatoOrdine;
 
 import java.sql.Time;
+import java.util.ArrayList;
 import java.util.Collection;
 
 public class Ordine {
@@ -23,6 +24,8 @@ public class Ordine {
 
 
     private Collection<Token> token;
+
+    private ArrayList<Portata> listComande;
 
     private Cliente cliente;
 
