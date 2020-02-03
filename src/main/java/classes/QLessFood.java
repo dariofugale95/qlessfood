@@ -65,9 +65,8 @@ public class QLessFood implements Observer {
 		return mapMenuPasto.get(menuPasto.getData()+"-"+String.valueOf(menuPasto.getTipologia()));
 	}
 
-	public boolean modificaMenu(Date newData, int newTipologia, double newPrezzo) {
-		MenuPasto menuPasto = mapMenuPasto.get(newData.toString()+"-"+String.valueOf(newTipologia));
-		eliminaMenu(menuPasto);
+	public boolean modificaMenu(MenuPasto menuPastoOld, Date newData, int newTipologia, double newPrezzo) {
+		eliminaMenu(menuPastoOld);
 		inserisciMenu(newData, newTipologia, newPrezzo);
 		int res = confermaDatiMenu();
 		if(res == 1)
@@ -106,6 +105,7 @@ public class QLessFood implements Observer {
 	public List<Portata> nuovoOrdine(Date Data, int Tipologia) {
 		ordine = new Ordine();
 		ricercaMenu(Data,Tipologia);
+
 	}
 */
 	public void selezionaPortata(int IdPortata) {
