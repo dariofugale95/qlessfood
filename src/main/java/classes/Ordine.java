@@ -7,7 +7,7 @@ import java.util.Collection;
 
 public class Ordine {
 
-    private int IdOrdine;
+    private static int IdOrdine=0;
 
     private Time FasciaOraria;
 
@@ -53,10 +53,11 @@ public class Ordine {
     }
 
     public Ordine() {
+        IdOrdine++;
     }
 
     public Ordine(int idOrdine, Time fasciaOraria, boolean tipoPagamento, int stato) {
-        IdOrdine = idOrdine;
+        IdOrdine++;
         FasciaOraria = fasciaOraria;
         TipoPagamento = tipoPagamento;
         Stato = stato;

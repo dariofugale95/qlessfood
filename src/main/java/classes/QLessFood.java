@@ -66,7 +66,8 @@ public class QLessFood implements Observer {
 	}
 
 	public boolean modificaMenu(Date newData, int newTipologia, double newPrezzo) {
-		eliminaMenu();
+		MenuPasto menuPasto = mapMenuPasto.get(newData.toString()+"-"+String.valueOf(newTipologia));
+		eliminaMenu(menuPasto);
 		inserisciMenu(newData, newTipologia, newPrezzo);
 		int res = confermaDatiMenu();
 		if(res == 1)
@@ -93,21 +94,20 @@ public class QLessFood implements Observer {
 		return false;
 	}
 
-	public boolean eliminaMenu() {
-		if(menuPasto != null){
-			menuPasto = null;
-			return true;
-		}
-		else{
+	public boolean eliminaMenu(MenuPasto menuPasto) {
+		MenuPasto mp = mapMenuPasto.remove(menuPasto);
+		if(mp == null){
 			return false;
 		}
+		return true;
 	}
 
-
+/*
 	public List<Portata> nuovoOrdine(Date Data, int Tipologia) {
-		return null;
+		ordine = new Ordine();
+		ricercaMenu(Data,Tipologia);
 	}
-
+*/
 	public void selezionaPortata(int IdPortata) {
 
 	}

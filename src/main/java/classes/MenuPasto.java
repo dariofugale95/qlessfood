@@ -18,7 +18,6 @@ public class MenuPasto {
 		this.Prezzo = prezzo;
 	}
 
-
 	private QLessFood qLessFood;
 
 	public Date getData() {

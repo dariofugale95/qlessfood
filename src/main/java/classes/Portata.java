@@ -17,6 +17,7 @@ public class Portata {
 	}
 
 	public Portata() {
+		IdPortata++;
 	}
 
 	public Portata(int tipo, String descrizione) {
