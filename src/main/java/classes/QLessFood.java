@@ -11,7 +11,10 @@ import java.util.List;
 
 public class QLessFood implements Observer {
 
-	private static QLessFood[] qLessFood;
+	private static QLessFood qLessFood; //intanze singleton
+
+
+
 
 	private Collection<MenuPasto> menuPasto;
 
@@ -29,12 +32,16 @@ public class QLessFood implements Observer {
 
 	private Observer observer;
 
-	private QLessFood QLessFood() {
-		return null;
+	private QLessFood() {
+
 	}
 
-	public QLessFood getInstance() {
-		return null;
+	public static QLessFood getInstance() {
+		if(qLessFood == null) {
+			qLessFood = new QLessFood();
+
+		}
+		return qLessFood;
 	}
 
 	public void gestisciMenu(String scelta) {
@@ -197,7 +204,14 @@ public class QLessFood implements Observer {
 		return 0;
 	}
 
+
+
 	public Cliente ricercaCliente(String Username) {
+		for(Cliente cliente : listClienti){
+			if(cliente.getUsername().equals(Username)) {
+				return cliente;
+			}
+		}
 		return null;
 	}
 
