@@ -4,7 +4,9 @@ import interfaces.Observable;
 import interfaces.Observer;
 
 import javax.sound.sampled.Port;
+import java.lang.ref.Cleaner;
 import java.sql.Time;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
@@ -24,19 +26,21 @@ public class QLessFood implements Observer {
 
 	private Collection<Token> listToken;
 
-	public List<Cliente> listClienti;
+	private List<Cliente> listClienti = new ArrayList<>();
 
+	public List<Cliente> getListClienti() {
+		return listClienti;
+	}
 
-
-
+	public void setListClienti(List<Cliente> listClienti) {
+		this.listClienti = listClienti;
+	}
 
 	private Collection<Evento> listEventi;
 
 	private Observer observer;
 
-	private QLessFood() {
-
-	}
+	private QLessFood() { }
 
 	public static QLessFood getInstance() {
 		if(qLessFood == null) {
@@ -203,8 +207,7 @@ public class QLessFood implements Observer {
 	}
 
 	public int confermaDatiCliente(Cliente c) {
-		Cliente temp = new Cliente(c.getUsername(), c.getPassword(), c.getEmail());
-		listClienti.add(temp);
+		listClienti.add(c);
 		return 1;
 	}
 

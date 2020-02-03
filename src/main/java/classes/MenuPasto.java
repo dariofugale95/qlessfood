@@ -3,24 +3,25 @@ package classes;
 import java.sql.Time;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 public class MenuPasto {
 
-	public MenuPasto() {
-
-	}
-
-	public MenuPasto(Time data, int tipologia, double prezzo) {
-		Data = data;
-		Tipologia = tipologia;
-		Prezzo = prezzo;
-	}
-
-	private Time Data;
+	private Date Data;
 
 	private int Tipologia;
 
 	private double Prezzo;
+
+	private List<Portata> listPortate;
+
+	public MenuPasto(Date data, int tipologia, double prezzo) {
+		this.Data = data;
+		this.Tipologia = tipologia;
+		this.Prezzo = prezzo;
+		this.listPortate = null;
+	}
+
 
 	private QLessFood qLessFood;
 
@@ -53,11 +54,11 @@ public class MenuPasto {
 		this.ordine = ordine;
 	}
 
-	public Portata getListPortate() {
+	public List<Portata> getListPortate() {
 		return listPortate;
 	}
 
-	public void setListPortate(Portata listPortate) {
+	public void setListPortate(List<Portata> listPortate) {
 		this.listPortate = listPortate;
 	}
 
@@ -69,13 +70,9 @@ public class MenuPasto {
 		this.qLessFood = qLessFood;
 	}
 
-	private Collection<Menù> menù;
-
 	private Collection<Ordine> ordine;
 
-	private Portata listPortate;
-
-	public MenuPasto newMenu(Date Data, int Tipologia, double Prezzo, int ListaIdPortate) {
+	public MenuPasto newMenu(Date Data, int Tipologia, double Prezzo, List<Integer> ListaIdPortate) {
 		return null;
 	}
 

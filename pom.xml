@@ -9,7 +9,16 @@
     <version>1.0-SNAPSHOT</version>
     <properties>
         <maven.compiler.release>11</maven.compiler.release>
-    </properties>
+    </properties>ù
+
+    <dependencies>
+        <dependency>
+            <!-- https://mvnrepository.com/artifact/org.swinglabs/swingx -->
+            <groupId>org.swinglabs</groupId>
+            <artifactId>swingx</artifactId>
+            <version>1.6.1</version>
+        </dependency>
+    </dependencies>
 
     <build>
         <pluginManagement>
@@ -22,5 +31,4 @@
             </plugins>
         </pluginManagement>
     </build>
-
 </project>
