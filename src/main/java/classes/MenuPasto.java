@@ -1,6 +1,7 @@
 package classes;
 
 import java.sql.Time;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
@@ -13,13 +14,12 @@ public class MenuPasto {
 
 	private double Prezzo;
 
-	private List<Portata> listPortate;
+	private List<Portata> listPortate = new ArrayList<>();
 
 	public MenuPasto(Date data, int tipologia, double prezzo) {
 		this.Data = data;
 		this.Tipologia = tipologia;
 		this.Prezzo = prezzo;
-		this.listPortate = null;
 	}
 
 
@@ -77,6 +77,9 @@ public class MenuPasto {
 	}
 
 	public boolean addToMenu(int Tipo, String Descrizione) {
+		Portata portata = new Portata(Tipo, Descrizione);
+		if(listPortate.add(portata))
+			return true;
 		return false;
 	}
 
