@@ -1,9 +1,8 @@
 package classes;
 
-import interfaces.StatoOrdine;
+public class StatoPronto extends StatoOrdine {
 
-public class StatoPronto implements StatoOrdine {
-
+	@Override
 	public void gestioneStatoOrdine() {
 
 	}

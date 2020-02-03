@@ -18,8 +18,7 @@ public class QLessFood implements Observer {
 	private Map<String, MenuPasto> mapMenuPasto = new HashMap<>();
 
 	private Ordine ordine;
-
-	private Collection<Ordine> listOrdini;
+	private List<Ordine> listOrdini = new ArrayList<>();
 
 	private Collection<Token> listToken;
 
@@ -101,13 +100,13 @@ public class QLessFood implements Observer {
 		return true;
 	}
 
-/*
+	/*
 	public List<Portata> nuovoOrdine(Date Data, int Tipologia) {
 		ordine = new Ordine();
 		ricercaMenu(Data,Tipologia);
+		ordine.gestioneStatoOrdine();
+	}*/
 
-	}
-*/
 	public void selezionaPortata(int IdPortata) {
 
 	}

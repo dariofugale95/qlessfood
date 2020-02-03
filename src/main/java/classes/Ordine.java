@@ -1,19 +1,15 @@
 package classes;
 
-import interfaces.StatoOrdine;
-
 import java.sql.Time;
 import java.util.Collection;
 
-public class Ordine {
+public class Ordine extends StatoOrdine{
 
     private static int IdOrdine=0;
 
     private Time FasciaOraria;
 
     private boolean TipoPagamento;
-
-    private int Stato;
 
     private MenuPasto menuPasto;
 
@@ -44,27 +40,18 @@ public class Ordine {
         return TipoPagamento;
     }
 
-    public int getStato() {
-        return Stato;
-    }
-
-    public void setStato(int stato) {
-        Stato = stato;
-    }
-
     public Ordine() {
         IdOrdine++;
     }
 
-    public Ordine(int idOrdine, Time fasciaOraria, boolean tipoPagamento, int stato) {
+    public Ordine(int idOrdine, Time fasciaOraria, boolean tipoPagamento) {
         IdOrdine++;
         FasciaOraria = fasciaOraria;
         TipoPagamento = tipoPagamento;
-        Stato = stato;
     }
 
     public Ordine newOrdine() {
-        return null;
+        return newOrdine();
     }
 
     public void setFasciaOraria(Time FasciaOraria) {
@@ -83,10 +70,7 @@ public class Ordine {
 
     }
 
-    public void setStatoOrdine(int Stato) {
-
-    }
-
+    @Override
     public void gestioneStatoOrdine() {
 
     }
