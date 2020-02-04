@@ -23,8 +23,9 @@ public class QLessFood implements Observer {
 	private List<Ordine> listOrdini = new ArrayList<>();
 
 	private Token token;
+	private Cliente cliente;
 
-    public Token getToken() {
+	public Token getToken() {
         return token;
     }
 
@@ -350,12 +351,13 @@ public class QLessFood implements Observer {
 
 	}
 
-	public boolean inserisciDatiCliente(String Username, String Email, String Password) {
-		return false;
+	public void inserisciDatiCliente(String Username, String Email, String Password) {
+		cliente = new Cliente(Username, Email, Password);
+
 	}
 
-	public int confermaDatiCliente(Cliente c) {
-		listClienti.add(c);
+	public int confermaDatiCliente() {
+		listClienti.add(this.cliente);
 		return 1;
 	}
 
@@ -370,12 +372,15 @@ public class QLessFood implements Observer {
 		return null;
 	}
 
-	public boolean confermaEliminaCliente() {
-		return false;
+	public boolean confermaEliminaCliente(String Username) {
+		Cliente cliente = ricercaCliente(Username);
+		return listClienti.remove(cliente);
 	}
 
 	public void visualizzaListaClienti() {
-
+		for(Cliente cliente : listClienti){
+			System.out.println(cliente.toString());
+		}
 	}
 
 	public double calcolaPrezzoFinale(int NomeToken, double prezzo) {
@@ -441,7 +446,7 @@ public class QLessFood implements Observer {
 	 */
 	@Override
 	public void update(Observable o, Object arg) {
-	    Cliente cliente = (Cliente) o;
-	    verifyIfToken(cliente);
+		Cliente cliente = (Cliente) o;
+		verifyIfToken(cliente);
 	}
 }
