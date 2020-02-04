@@ -16,7 +16,9 @@ public class QLFApplication {
 
     public static void main(String[] args) throws IOException, ParseException, InterruptedException {
 
-        qLessFood = qLessFood.getInstance();
+
+
+        qLessFood = qLessFood.getInstance(); //singleton
 
         Cliente c = new Cliente();
 
@@ -189,9 +191,11 @@ public class QLFApplication {
                                     System.out.println("Confermi? [y/n]");
                                     String conferma = in.readLine();
                                     if(conferma=="y"){
-                                        qLessFood.confermaDatiToken();
+                                        if(qLessFood.confermaDatiToken()==1)
+                                            System.out.println("Token inserito con successo nella Lista dei Token di QLessFood.");
                                     }
                                     continue;
+
                                 case 2: //ricerca di un token
                                     System.out.println("--- Ricerca Token---");
                                     System.out.println("Inserici il nome del Token da ricercare: ");
@@ -199,6 +203,8 @@ public class QLFApplication {
                                     Token tokenSearch = qLessFood.ricercaToken(ricToken);
                                     System.out.println("Token trovato: "+tokenSearch);
                                     continue;
+
+
                                 case 3: //modifica token
                                     System.out.println("--- Modifica Token---");
                                     System.out.println("Che modifica vuoi effettuare?");
@@ -242,6 +248,8 @@ public class QLFApplication {
                             continue;
                         case 4: //visualizza Clienti QLessFood
                             System.out.println("--- Visualizza Clienti QLessFood ---");
+                            List<Cliente> Users = qLessFood.getListClienti();
+                            System.out.println("Lista clienti: "+Users);
                             continue;
                         case 5: //Emetti Fattura
 
