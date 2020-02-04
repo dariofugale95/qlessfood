@@ -60,7 +60,8 @@ public class QLFApplication {
                     System.out.println("3. Visualizza Ordini");
                     System.out.println("4. Visualizza Clienti registrati a QLessFood");
                     System.out.println("5. Emetti una Fattura");
-                    System.out.println("6. Esci");
+                    System.out.println("6. Gestisci Eventi");
+                    System.out.println("7. Esci");
 
                     int sceltaAdmin = scannerIO.nextInt();
 
@@ -290,7 +291,42 @@ public class QLFApplication {
                             }
 
                             continue;
-                        case 6: // USCITA PORTALE ADMIN
+                        case 6: //Gestione Evento
+                            System.out.println("--- Gestione Evento ---");
+                            System.out.println("1. Inserisci Nuovo Evento");
+                            System.out.println("2. Ricerca Evento");
+                            System.out.println("3. Modifica Evento");
+                            System.out.println("4. Elimina Evento");
+                            System.out.println("5. Esci");
+                            int eventScelta = scannerIO.nextInt();
+                            switch(eventScelta){
+                                case 1: //inserimento evento
+                                    System.out.println("--- Inserimento Nuovo Evento ---");
+                                    System.out.println("Inserisci nome evento: ");
+                                    String nomeEvento = in.readLine();
+                                    System.out.println("Inserisci data evento: [dd/MM/yyyy] ");
+                                    String newData = in.readLine();
+                                    Date dataEvento = new SimpleDateFormat("dd/MM/yyyy").parse(newData);
+                                    System.out.println("Inserisci numero di posti disponibili: ");
+                                    int numPosti = scannerIO.nextInt();
+                                    System.out.println("Inserisci prezzo del biglietto: ");
+                                    double prezzoBiglietto = scannerIO.nextDouble();
+                                    System.out.println("Inserisci percentuale di sconto con prenotazione su QLessFood: ");
+                                    int percSconto = scannerIO.nextInt();
+                                    qLessFood.inserisciDatiEvento(nomeEvento, dataEvento, numPosti, prezzoBiglietto,percSconto);
+                                    continue;
+                                case 2: //ricerca evento
+                                    continue;
+                                case 3: //modifica evento
+                                    continue;
+                                case 4: //elimina evento
+                                    continue;
+                                case 5: // esci evento
+                                    break;
+                            }//end eventScelta
+
+                            continue;
+                        case 7: // USCITA PORTALE ADMIN
                             break; // esco dalla gestione dell'admin
                     }
                     break;
@@ -316,72 +352,83 @@ public class QLFApplication {
 
                             if (c != null) {
                                 System.out.println("**** AREA CLIENTI ****** ");
-                                System.out.println("Prenotazione di un Pasto da Effettì Mense");
-                                System.out.println("Inserisci Data del pasto: ");
-                                data = in.readLine();
-                                date = new SimpleDateFormat("dd/MM/yyyy").parse(data);
-                                System.out.println("Inserisci tipologia pasto: [0: PRANZO | 1: CENA]");
-                                int ti = scannerIO.nextInt();
-                                MenuPasto m = qLessFood.ricercaMenu(date, ti);
-                                ArrayList<Portata> listportate = (ArrayList<Portata>) m.getListPortate();
-                                System.out.println("Queste sono le portate del Menu: " + listportate); //deve essere fatto un foreach ...
+                                System.out.println("1. Prenotazione di un Pasto da Effettì Mense");
+                                System.out.println("2. Prenotazione di un Evento");
+                                int clientScelta = scannerIO.nextInt();
+                                switch(clientScelta) {
+
+                                    case 1:
+                                        System.out.println("Inserisci Data del pasto: ");
+                                        data = in.readLine();
+                                        date = new SimpleDateFormat("dd/MM/yyyy").parse(data);
+                                        System.out.println("Inserisci tipologia pasto: [0: PRANZO | 1: CENA]");
+                                        int ti = scannerIO.nextInt();
+                                        MenuPasto m = qLessFood.ricercaMenu(date, ti);
+                                        ArrayList<Portata> listportate = (ArrayList<Portata>) m.getListPortate();
+                                        System.out.println("Queste sono le portate del Menu: " + listportate); //deve essere fatto un foreach ...
 
 
-                                for (int i = 0; i < 6; i++) {
-                                    System.out.println("Inserisci id portata: ");
-                                    int id = scannerIO.nextInt();
-                                    // qui deve continuare
-                                    qLessFood.selezionaPortata(id, date,ti);
-                                    // continua
+                                        for (int i = 0; i < 6; i++) {
+                                            System.out.println("Inserisci id portata: ");
+                                            int id = scannerIO.nextInt();
+                                            // qui deve continuare
+                                            qLessFood.selezionaPortata(id, date, ti);
+                                            // continua
+                                        }
+
+                                        // seleziona fascia oraria
+                                        System.out.println("Seleziona fascia oraria: ");
+                                        data = in.readLine();
+                                        Date fascia = new SimpleDateFormat("dd/MM/yyyy").parse(data);
+
+                                        //tipo pagamento
+                                        System.out.println("Seleziona metodo di pagamento [0: ALLA CASSA | 1: ONLINE]");
+                                        int metodo = scannerIO.nextInt();
+                                        if (metodo == 1) { // pagamento con carta
+                                            System.out.println("--- Inserimento Dati Carta --- ");
+                                            System.out.println("Inserisci Numero Carta: ");
+                                            String NumCarta = in.readLine();
+                                            System.out.println("Inserisci Nome Intestatario: ");
+                                            String nome = in.readLine();
+                                            System.out.println("Inserisci Cognome Intestatario");
+                                            String cognome = in.readLine();
+                                            System.out.println("Inserisci CVV");
+                                            int CVV = scannerIO.nextInt();
+                                            System.out.println("Data scadenza: [MM/AA]");
+                                            String dataScadenza = in.readLine();
+
+                                            qLessFood.inserisciDatiCarta(NumCarta, nome, cognome, CVV, dataScadenza);
+
+                                            System.out.println(" Verifica in Corso ... ");
+                                            TimeUnit.SECONDS.sleep(2);
+                                            System.out.println("Pagamento effettuato con successo.");
+
+
+                                        }
+                                        // conferma dati nuovo Ordine --------- ORDINE?
+                                        qLessFood.nuovoOrdine(date, ti);
+                                        int sconto = qLessFood.getUserToken(username);
+
+                                        if (sconto != 0) {
+                                            System.out.println("Gentile " + username + "Hai il Token-" + sconto);
+                                            System.out.println("Vuoi utilizzarlo? [y/n]");
+                                            String risp = in.readLine();
+                                            if (risp == "y") {
+                                                qLessFood.utilizzaToken(sconto, 5);
+                                                qLessFood.confermaUtilizzoToken(username);
+                                            }
+                                        }
+                                        qLessFood.confermaDatiNuovoOrdine();
+                                        continue;
+                                    case 2:
+                                        System.out.println("--- Prenotazione Evento --- ");
+                                        continue;
+
                                 }
 
-                                // seleziona fascia oraria
-                                System.out.println("Seleziona fascia oraria: ");
-                                data = in.readLine();
-                                Date fascia = new SimpleDateFormat("dd/MM/yyyy").parse(data);
-
-                                //tipo pagamento
-                                System.out.println("Seleziona metodo di pagamento [0: ALLA CASSA | 1: ONLINE]");
-                                int metodo = scannerIO.nextInt();
-                                if (metodo == 1) { // pagamento con carta
-                                    System.out.println("--- Inserimento Dati Carta --- ");
-                                    System.out.println("Inserisci Numero Carta: ");
-                                    String NumCarta = in.readLine();
-                                    System.out.println("Inserisci Nome Intestatario: ");
-                                    String nome = in.readLine();
-                                    System.out.println("Inserisci Cognome Intestatario");
-                                    String cognome = in.readLine();
-                                    System.out.println("Inserisci CVV");
-                                    int CVV = scannerIO.nextInt();
-                                    System.out.println("Data scadenza: [MM/AA]");
-                                    String dataScadenza = in.readLine();
-
-                                    qLessFood.inserisciDatiCarta(NumCarta, nome, cognome, CVV, dataScadenza);
-
-                                    System.out.println(" Verifica in Corso ... ");
-                                    TimeUnit.SECONDS.sleep(2);
-                                    System.out.println("Pagamento effettuato con successo.");
-
-
-                                }
-                                // conferma dati nuovo Ordine --------- ORDINE?
-                                qLessFood.nuovoOrdine(date, ti);
-                                int sconto=qLessFood.getUserToken(username);
-
-                                if(sconto!=0){
-                                    System.out.println("Gentile " +username+"Hai il Token-"+sconto);
-                                    System.out.println("Vuoi utilizzarlo? [y/n]");
-                                    String risp = in.readLine();
-                                    if(risp=="y"){
-                                        qLessFood.utilizzaToken(sconto, 5);
-                                        qLessFood.confermaUtilizzoToken(username);
-                                    }
-                                }
-                                qLessFood.confermaDatiNuovoOrdine();
-
+                            continue;
 
                             }
-                            continue;
 
                         case 2: // Register
                             System.out.println("Inserisci username: ");
