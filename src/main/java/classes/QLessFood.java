@@ -23,8 +23,11 @@ public class QLessFood implements Observer {
 	private List<Ordine> listOrdini = new ArrayList<>();
 
 	private Token token;
+	private Cliente cliente;
+	private Evento evento;
+	private Prenotazione prenotazione;
 
-    public Token getToken() {
+	public Token getToken() {
         return token;
     }
 
@@ -350,12 +353,13 @@ public class QLessFood implements Observer {
 
 	}
 
-	public boolean inserisciDatiCliente(String Username, String Email, String Password) {
-		return false;
+	public void inserisciDatiCliente(String Username, String Email, String Password) {
+		cliente = new Cliente(Username, Email, Password);
+
 	}
 
-	public int confermaDatiCliente(Cliente c) {
-		listClienti.add(c);
+	public int confermaDatiCliente() {
+		listClienti.add(this.cliente);
 		return 1;
 	}
 
@@ -370,12 +374,15 @@ public class QLessFood implements Observer {
 		return null;
 	}
 
-	public boolean confermaEliminaCliente() {
-		return false;
+	public boolean confermaEliminaCliente(String Username) {
+		Cliente cliente = ricercaCliente(Username);
+		return listClienti.remove(cliente);
 	}
 
 	public void visualizzaListaClienti() {
-
+		for(Cliente cliente : listClienti){
+			System.out.println(cliente.toString());
+		}
 	}
 
 	public double calcolaPrezzoFinale(int NomeToken, double prezzo) {
@@ -386,36 +393,50 @@ public class QLessFood implements Observer {
 
 	}
 
-	public boolean inserisciDatiEvento(String Nome, Date Data, int PostiTotali, double Prezzo, int Sconto) {
-		return false;
+	public void inserisciDatiEvento(String Nome, Date Data, int PostiTotali, double Prezzo, int Sconto) {
+		this.evento = new Evento(Nome, Data, PostiTotali, Prezzo, Sconto);
 	}
+
 
 	public int confermaDatiEvento() {
-		return 0;
+		listEventi.add(this.evento);
+		return 1;
 	}
 
-	public Evento ricercaEvento(Date Data) {
+	public Evento ricercaEvento(String NomeEvento) {
+		for(Evento evento : listEventi){
+			if(evento.getNome() == NomeEvento){
+				return evento;
+			}
+		}
 		return null;
 	}
 
-	public boolean confermaEliminaEvento() {
-		return false;
+	public boolean confermaEliminaEvento(String NomeEvento) {
+		Evento evento = ricercaEvento(NomeEvento);
+		return listEventi.remove(evento);
 	}
 
 	public void selezionaEvento(Date Data) {
 
 	}
 
-	public boolean inserisciPostiPrenotazione(int QuantitaRichiesta) {
-		return false;
+	public void inserisciPostiPrenotazione(int QuantitaRichiesta, String NomeEventoRichiesto, String Username) {
+		this.prenotazione = new Prenotazione(QuantitaRichiesta, NomeEventoRichiesto, Username);
 	}
 
 	public int confermaDatiPrenotazione() {
+		Evento evento = ricercaEvento(this.prenotazione.getNomeEventoRichiesto());
+		if(this.prenotazione.getQuantitaRichiesta() < evento.getPostiTotali()){
+			evento.aggiungiPrenotazione(this.prenotazione);
+			return 1;
+		}
 		return 0;
 	}
 
-	public void ricercaPrenotazioniEvento(Date DataEvento) {
-
+	public void ricercaPrenotazioniEvento(String NomeEvento) {
+		Evento evento = ricercaEvento(NomeEvento);
+		evento.visualizzaMappaPrenotazioni();
 	}
 
 	public void visualizzaListaOrdini() {
@@ -441,7 +462,7 @@ public class QLessFood implements Observer {
 	 */
 	@Override
 	public void update(Observable o, Object arg) {
-	    Cliente cliente = (Cliente) o;
-	    verifyIfToken(cliente);
+		Cliente cliente = (Cliente) o;
+		verifyIfToken(cliente);
 	}
 }
