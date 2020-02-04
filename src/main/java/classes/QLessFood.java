@@ -25,6 +25,7 @@ public class QLessFood implements Observer {
 	private Token token;
 	private Cliente cliente;
 	private Evento evento;
+	private Prenotazione prenotazione;
 
 	public Token getToken() {
         return token;
@@ -420,16 +421,22 @@ public class QLessFood implements Observer {
 
 	}
 
-	public boolean inserisciPostiPrenotazione(int QuantitaRichiesta) {
-		return false;
+	public void inserisciPostiPrenotazione(int QuantitaRichiesta, String NomeEventoRichiesto, String Username) {
+		this.prenotazione = new Prenotazione(QuantitaRichiesta, NomeEventoRichiesto, Username);
 	}
 
 	public int confermaDatiPrenotazione() {
+		Evento evento = ricercaEvento(this.prenotazione.getNomeEventoRichiesto());
+		if(this.prenotazione.getQuantitaRichiesta() < evento.getPostiTotali()){
+			evento.aggiungiPrenotazione(this.prenotazione);
+			return 1;
+		}
 		return 0;
 	}
 
-	public void ricercaPrenotazioniEvento(Date DataEvento) {
-
+	public void ricercaPrenotazioniEvento(String NomeEvento) {
+		Evento evento = ricercaEvento(NomeEvento);
+		evento.visualizzaMappaPrenotazioni();
 	}
 
 	public void visualizzaListaOrdini() {

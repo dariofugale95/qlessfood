@@ -1,7 +1,6 @@
 package classes;
 
-import java.util.Collection;
-import java.util.Date;
+import java.util.*;
 
 public class Evento {
 
@@ -62,15 +61,7 @@ public class Evento {
 		Sconto = sconto;
 	}
 
-	private Collection<Prenotazione> mapUserPrenotazioni;
-
-	public Collection<Prenotazione> getMapUserPrenotazioni() {
-		return mapUserPrenotazioni;
-	}
-
-	public void setMapUserPrenotazioni(Collection<Prenotazione> mapUserPrenotazioni) {
-		this.mapUserPrenotazioni = mapUserPrenotazioni;
-	}
+	private Map<String,Prenotazione> mapUserPrenotazioni = new HashMap<>();
 
 	private QLessFood qLessFood;
 
@@ -79,15 +70,19 @@ public class Evento {
 	}
 
 	public void aggiungiPrenotazione(Prenotazione pr) {
+		double prezzoScontato = calcolaPrezzoTotale(pr.getQuantitaRichiesta(), this.getPrezzo(), this.getSconto());
+		pr.setPrezzoTotale(prezzoScontato);
+		decreasePostiTotali(pr.getQuantitaRichiesta());
+		mapUserPrenotazioni.put(pr.getUsername(),pr);
 	}
 
 
 	public double calcolaPrezzoTotale(int QuantitaRichiesta, double Prezzo, int Sconto) {
-		return 0;
+		return (Prezzo-(Prezzo*Sconto)/100)*QuantitaRichiesta;
 	}
 
 	public void decreasePostiTotali(int QuantitaRichiesta) {
-
+		this.setPostiTotali(this.getPostiTotali()-QuantitaRichiesta);
 	}
 
 	public void getMappaPrenotazioni() {
@@ -95,7 +90,8 @@ public class Evento {
 	}
 
 	public void visualizzaMappaPrenotazioni() {
-
+		for(Map.Entry<String,Prenotazione> entry: mapUserPrenotazioni.entrySet()){
+			System.out.println(entry.toString());
+		}
 	}
-
 }
