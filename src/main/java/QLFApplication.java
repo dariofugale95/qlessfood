@@ -1,7 +1,4 @@
-import classes.Cliente;
-import classes.MenuPasto;
-import classes.Portata;
-import classes.QLessFood;
+import classes.*;
 
 import javax.sound.sampled.Port;
 import java.io.BufferedReader;
@@ -56,7 +53,10 @@ public class QLFApplication {
                     System.out.println("QLessFood - Portale Admin");
                     System.out.println("1. Gestione dei Menu");
                     System.out.println("2. Gestione dei Token-Sconto");
-                    System.out.println("3. Esci");
+                    System.out.println("3. Visualizza Ordini");
+                    System.out.println("4. Visualizza Clienti registrati a QLessFood");
+                    System.out.println("5. Emetti una Fattura");
+                    System.out.println("6. Esci");
 
                     int sceltaAdmin = scannerIO.nextInt();
 
@@ -172,12 +172,70 @@ public class QLFApplication {
                         case 2: // SEZIONE TOKEN
                             System.out.println("1. Inserisci un Nuovo Token");
                             System.out.println("2. Ricerca un Token");
+                            System.out.println("3. Modifica Dati Token");
+                            System.out.println("4. Elimina Token");
+                            System.out.println("5. Esci");
+                            int sceltaToken =scannerIO.nextInt();
+                            switch(sceltaToken){
+
+                                case 1: //inserimento nuovo token
+                                    System.out.println("--- Inserimento Token---");
+                                    System.out.println("Inserici il nome del Token (Che corrisponderà alla percentuale di sconto): ");
+                                    int NomeToken = scannerIO.nextInt();
+                                    System.out.println("Inserisci il numero di pasti utili per ottenere il token: ");
+                                    int NumPasti = scannerIO.nextInt();
+                                    qLessFood.inserisciDatiToken(NomeToken, NumPasti);
+                                    System.out.println("Dati inseriti: Nome: Token-"+NomeToken+" Numero Pasti: "+NumPasti);
+                                    System.out.println("Confermi? [y/n]");
+                                    String conferma = in.readLine();
+                                    if(conferma=="y"){
+                                        qLessFood.confermaDatiToken();
+                                    }
+                                    continue;
+                                case 2: //ricerca di un token
+                                    System.out.println("--- Ricerca Token---");
+                                    System.out.println("Inserici il nome del Token da ricercare: ");
+                                    int ricToken = scannerIO.nextInt();
+                                    Token tokenSearch = qLessFood.ricercaToken(ricToken);
+                                    System.out.println("Token trovato: "+tokenSearch);
+
+
+                                    continue;
+                                case 3: //modifica token
+                                    continue;
+                                case 4: //eliminazione token
+                                    continue;
+                                case 5: //esci sezione token
+                                    break;
+
+                            }//end token
                             continue;
 
+                        case 3: // gestione Ordini
+                            System.out.println("---Visualizza Ordini---");
+                            qLessFood.visualizzaListaOrdini();
+                            System.out.println("Ordini da preparare: (Stato: 1)");
+                            qLessFood.visualizzaOrdiniInPreparazione(1);
+                            System.out.println("Per confermare l'ordine, premere [y]");
+                            String conferma = in.readLine();
+                            if(conferma=="y")
+                                qLessFood.confermaOrdine();
+                            System.out.println("Ordine confermato. Verrà generato un QRCode a breve.");
+                            continue;
+                        case 4: //visualizza Clienti QLessFood
+                            System.out.println("--- Visualizza Clienti QLessFood ---");
+                            continue;
+                        case 5: //Emetti Fattura
+                            Ordine o = new Ordine();
+                            System.out.println("Scanning QR Code ...");
+                            qLessFood.scanQRCode(o);
+                            System.out.println("Setta come pagato? (premi [y])");
 
-                        case 3: // USCITA PORTALE ADMIN
+                            continue;
+                        case 6: // USCITA PORTALE ADMIN
                             break; // esco dalla gestione dell'admin
                     }
+                    break;
 
                 case 2:
                     System.out.println("Area Clienti");
@@ -248,6 +306,7 @@ public class QLFApplication {
 
 
                                 }
+                                // conferma dati nuovo Ordine
 
                             }
                             continue;
@@ -275,7 +334,7 @@ public class QLFApplication {
                     }
 
                 case 3:
-                    //System.exit(0);
+                    System.exit(0);
                     break;
             }
         }
