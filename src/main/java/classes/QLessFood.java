@@ -22,9 +22,12 @@ public class QLessFood implements Observer {
 	private Ordine ordine;
 	private List<Ordine> listOrdini = new ArrayList<>();
 
-	private Collection<Token> listToken;
+	private List<Token> listToken = new ArrayList<>();
 
 	private List<Cliente> listClienti = new ArrayList<>();
+
+	private Map<String,Integer> mapUserToken = new HashMap<>();
+
 	private String isPaymentVerified;
 
 	public String getIsPaymentVerified() {
@@ -365,15 +368,23 @@ public class QLessFood implements Observer {
 	}
 
 	public boolean verifyIfToken(Cliente c) {
-		return false;
+	    int res = c.getNumOrdini() % listToken.get(listToken.size() - 1).getNumPasti();
+        for (Token t : listToken) {
+            if(res == t.getNumPasti()){
+                mapUserToken.put(c.getUsername(),t.getNome());
+                return true;
+            }
+        }
+        return false;
 	}
 
 
 	/**
 	 * @see 4-DCD - DiagrammaClassiProgetto.Observer#update(4-DCD - DiagrammaClassiProgetto.Observable, Object)
 	 */
-
+	@Override
 	public void update(Observable o, Object arg) {
-
+	    Cliente cliente = (Cliente) o;
+	    verifyIfToken(cliente);
 	}
 }
