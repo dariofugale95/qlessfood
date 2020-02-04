@@ -379,6 +379,7 @@ public class QLFApplication {
                                 }
                                 qLessFood.confermaDatiNuovoOrdine();
 
+
                             }
                             continue;
 
@@ -390,10 +391,10 @@ public class QLFApplication {
                             System.out.println("Inserisci password: ");
                             String pwd = in.readLine();
 
-                            Cliente newCliente = new Cliente(u, email, pwd);
 
+                            qLessFood.inserisciDatiCliente(u,email,pwd);
 
-                            if (qLessFood.confermaDatiCliente(newCliente) == 1) {
+                            if (qLessFood.confermaDatiCliente()== 1) {
                                 System.out.println("Registrazione effettuata con successo.\nEffettuare login per accedere a QLessFood.");
                             }
                             continue;
