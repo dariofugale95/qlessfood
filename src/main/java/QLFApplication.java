@@ -178,6 +178,7 @@ public class QLFApplication {
                         case 3: // USCITA PORTALE ADMIN
                             break; // esco dalla gestione dell'admin
                     }
+                    break;
 
                 case 2:
                     System.out.println("Area Clienti");
