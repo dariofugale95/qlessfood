@@ -319,12 +319,31 @@ public class QLessFood implements Observer {
 	    return false;
 	}
 
-	public void utilizzaToken(int nomeToken) {
-
+	public Ordine getOrdineById(int IdOrdine){
+		for(Ordine ordine : listOrdini){
+			if(ordine.getIdOrdine() == IdOrdine){
+				return ordine;
+			}
+		}
+		return null;
+	}
+	public void utilizzaToken(int NomeToken, int IdOrdine) {
+		Ordine ordine = getOrdineById(IdOrdine);
+		if(ordine != null){
+			double prezzoIntero = ordine.getTotale();
+			double prezzoScontato = this.calcolaPrezzoFinale(NomeToken,prezzoIntero);
+			this.ordine = ordine;
+			this.ordine.setTotale(prezzoScontato);
+			Collections.replaceAll(listOrdini,ordine,this.ordine);
+		}
 	}
 
 	public int confermaUtilizzoToken(String Username) {
-		return 0;
+		return mapUserToken.remove(Username);
+	}
+
+	public int getUserToken(String Username){
+		return mapUserToken.get(Username);
 	}
 
 	public void gestisciCliente(String Scelta) {
@@ -360,7 +379,7 @@ public class QLessFood implements Observer {
 	}
 
 	public double calcolaPrezzoFinale(int NomeToken, double prezzo) {
-		return 0;
+		return prezzo-((prezzo*NomeToken)/100);
 	}
 
 	public void gestisciEvento(String Scelta) {
