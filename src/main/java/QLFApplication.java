@@ -211,12 +211,14 @@ public class QLFApplication {
 
                                         case 1:
                                             System.out.println("Modifica Nome di un Token");
-                                            System.out.println("Inserici il nome del Token da ricercare: ");
-                                            int r = scannerIO.nextInt();
-                                            Token tkn = qLessFood.ricercaToken(r);
-
+                                            continue;
+                                        case 2:
+                                            System.out.println("Modifica Numero Pasti di un Token");
+                                            continue;
+                                        case 3:
+                                            System.out.println("Modifica tutte le informazioni di un Token");
+                                            continue;
                                     }
-
 
                                     continue;
                                 case 4: //eliminazione token
@@ -244,12 +246,13 @@ public class QLFApplication {
                         case 5: //Emetti Fattura
 
                             System.out.println("Scanning QR Code ...");
+                            String  usr = "ciao";
                             Fattura f = qLessFood.scanQRCode(5);
                             if(f!=null){
                                 System.out.println("Setta come pagato? (premi [y])");
                                 String set = in.readLine();
                                 if(set=="y"){
-                                    qLessFood.setOrdinePagato(5);
+                                    //qLessFood.setOrdinePagato(5, usr);
                                 }
                             }
 
