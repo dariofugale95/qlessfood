@@ -324,7 +324,7 @@ public class QLFApplication {
                                 int ti = scannerIO.nextInt();
                                 MenuPasto m = qLessFood.ricercaMenu(date, ti);
                                 ArrayList<Portata> listportate = (ArrayList<Portata>) m.getListPortate();
-                                System.out.println("Queste sono le portate del Menu: " + listportate);
+                                System.out.println("Queste sono le portate del Menu: " + listportate); //deve essere fatto un foreach ...
 
 
                                 for (int i = 0; i < 6; i++) {
@@ -365,6 +365,8 @@ public class QLFApplication {
 
                                 }
                                 // conferma dati nuovo Ordine --------- ORDINE?
+                                qLessFood.nuovoOrdine(date, ti);
+                                
 
                             }
                             continue;
