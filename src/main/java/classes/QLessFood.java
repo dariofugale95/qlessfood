@@ -22,9 +22,22 @@ public class QLessFood implements Observer {
 	private Ordine ordine;
 	private List<Ordine> listOrdini = new ArrayList<>();
 
-	private Collection<Token> listToken;
+	private Token token;
+
+    public Token getToken() {
+        return token;
+    }
+
+    public void setToken(Token token) {
+        this.token = token;
+    }
+
+    private List<Token> listToken = new ArrayList<>();
 
 	private List<Cliente> listClienti = new ArrayList<>();
+
+	private Map<String,Integer> mapUserToken = new HashMap<>();
+
 	private String isPaymentVerified;
 
 	public String getIsPaymentVerified() {
@@ -243,7 +256,13 @@ public class QLessFood implements Observer {
 	}
 
 	public boolean inserisciDatiToken(int Nome, int NumPasti) {
-		return false;
+		token = new Token(Nome,NumPasti);
+		if(token != null){
+		    return true;
+        }
+		else{
+		    return false;
+        }
 	}
 
 	public void gestisciToken(String Scelta) {
@@ -251,31 +270,53 @@ public class QLessFood implements Observer {
 	}
 
 	public int confermaDatiToken() {
-		return 0;
+	    if(token == null){
+	        return 0;
+        }
+	    else{
+	        listToken.add(this.token);
+            return 1;
+        }
 	}
 
 	public Token ricercaToken(int Nome) {
-		return null;
+        for (Token t : listToken) {
+            if(t.getNome() == Nome){
+                return t;
+            }
+        }
+        return null;
 	}
 
 	public boolean modificaToken(String SceltaModifica) {
 		return false;
 	}
 
-	public boolean modificaNomeToken(int newNome) {
-		return false;
+	public boolean modificaNomeToken(int oldNome, int newNome) {
+        Token oldToken = ricercaToken(oldNome);
+	    Token newToken = new Token(newNome,oldToken.getNumPasti());
+	    return Collections.replaceAll(listToken, oldToken, newToken);
 	}
 
-	public boolean modificaNumeroPasti(int newNumPasti) {
-		return false;
+	public boolean modificaNumeroPasti(int oldNome, int newNumPasti) {
+		Token oldToken = ricercaToken(oldNome);
+		Token newToken = new Token(oldToken.getNome(), newNumPasti);
+		return Collections.replaceAll(listToken, oldToken, newToken);
 	}
 
-	public boolean modificaTutto(int newNome, int newNumPasti) {
-		return false;
+	public boolean modificaTutto(int oldNome, int newNome, int newNumPasti) {
+	    Token oldToken = ricercaToken(oldNome);
+	    Token newToken = new Token(newNome, newNumPasti);
+		return Collections.replaceAll(listToken, oldToken, newToken);
 	}
 
-	public boolean eliminaToken() {
-		return false;
+	public boolean eliminaToken(int Nome) {
+	    for(Token t : listToken){
+		    if(t.getNome() == Nome){
+		        return listToken.remove(t);
+            }
+        }
+	    return false;
 	}
 
 	public void utilizzaToken(int nomeToken) {
@@ -365,15 +406,23 @@ public class QLessFood implements Observer {
 	}
 
 	public boolean verifyIfToken(Cliente c) {
-		return false;
+	    int res = c.getNumOrdini() % listToken.get(listToken.size() - 1).getNumPasti();
+        for (Token t : listToken) {
+            if(res == t.getNumPasti()){
+                mapUserToken.put(c.getUsername(),t.getNome());
+                return true;
+            }
+        }
+        return false;
 	}
 
 
 	/**
 	 * @see 4-DCD - DiagrammaClassiProgetto.Observer#update(4-DCD - DiagrammaClassiProgetto.Observable, Object)
 	 */
-
+	@Override
 	public void update(Observable o, Object arg) {
-
+	    Cliente cliente = (Cliente) o;
+	    verifyIfToken(cliente);
 	}
 }

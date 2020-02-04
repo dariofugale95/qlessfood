@@ -3,7 +3,9 @@ package classes;
 import interfaces.Observable;
 import interfaces.Observer;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 public class Cliente implements Observable {
     private String Username;
@@ -13,6 +15,8 @@ public class Cliente implements Observable {
     private String Email;
 
     private int NumOrdini;
+
+    private List<Observer> observers = new ArrayList<>();
 
     public int getNumOrdini() {
         return NumOrdini;
@@ -52,6 +56,7 @@ public class Cliente implements Observable {
      */
     public void setState() {
         this.setNumOrdini(this.getNumOrdini()+1);
+        notifyObservers(observers);
     }
 
     public void notifyObservers(QLessFood qlf) {
@@ -131,7 +136,7 @@ public class Cliente implements Observable {
      */
     @Override
     public void addObserver(Observer o) {
-
+        this.observers.add(o);
     }
 
 
@@ -142,7 +147,7 @@ public class Cliente implements Observable {
      */
     @Override
     public void deleteObserver(Observer o) {
-
+        this.observers.remove(o);
     }
 
 
@@ -150,7 +155,9 @@ public class Cliente implements Observable {
      * @see 4-DCD - DiagrammaClassiProgetto.Observable#notifyObserver(4-DCD - DiagrammaClassiProgetto.Observer)
      */
     @Override
-    public void notifyObserver(Observer o) {
-
+    public void notifyObservers(List<Observer> observers) {
+        for(Observer obs : this.observers){
+            obs.update(this, this.getNumOrdini());
+        }
     }
 }
