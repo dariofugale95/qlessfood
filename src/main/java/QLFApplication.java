@@ -33,6 +33,8 @@ public class QLFApplication {
 
         String data;
         Date date;
+        int nomeTkn;
+        int numPastiTkn;
 
         while(true) {
 
@@ -207,27 +209,50 @@ public class QLFApplication {
 
                                 case 3: //modifica token
                                     System.out.println("--- Modifica Token---");
+                                    System.out.println("Inserici il nome del Token da ricercare: ");
+                                    int r = scannerIO.nextInt();
+                                    Token tknSearch = qLessFood.ricercaToken(r);
+                                    System.out.println("Token trovato: "+tknSearch);
                                     System.out.println("Che modifica vuoi effettuare?");
                                     System.out.println("1. Modifica Nome di un Token");
                                     System.out.println("2. Modifica Numero Pasti di un Token");
-                                    System.out.println("3. Modifica Totale di un Token");
+                                    System.out.println("3. Modifica Totale (Nome + Num Pasti) di un Token");
                                     int modifica = scannerIO.nextInt();
 
                                     switch(modifica){
-
+                                        // ore 17.16: modificare le firme dei metodi delle funzioni
                                         case 1:
                                             System.out.println("Modifica Nome di un Token");
+                                            System.out.println("Inserisci il nuovo nome del token: ");
+                                            nomeTkn = scannerIO.nextInt();
+                                            if(qLessFood.modificaNomeToken(nomeTkn)==true)
+                                                System.out.println("Modifica effettuata con successo.");
                                             continue;
                                         case 2:
                                             System.out.println("Modifica Numero Pasti di un Token");
+                                            System.out.println("Inserisci il nuovo numero dei pasti del token: ");
+                                             numPastiTkn = scannerIO.nextInt();
+                                            if(qLessFood.modificaNumeroPasti(numPastiTkn)==true)
+                                                System.out.println("Modifica effettuata con successo.");
                                             continue;
                                         case 3:
                                             System.out.println("Modifica tutte le informazioni di un Token");
+                                            System.out.println("Inserisci il nuovo nome del token: ");
+                                            nomeTkn = scannerIO.nextInt();
+                                            System.out.println("Inserisci il nuovo numero dei past del token: ");
+                                            numPastiTkn = scannerIO.nextInt();
+                                            if(qLessFood.modificaTutto(nomeTkn,numPastiTkn)==true)
+                                                System.out.println("Modifica effettuata con successo.");
                                             continue;
                                     }
 
                                     continue;
                                 case 4: //eliminazione token
+                                    System.out.println("Eliminazione di un Token");
+                                    System.out.println("Inserisci il nome del token: ");
+                                    nomeTkn = scannerIO.nextInt();
+                                    if(qLessFood.eliminaToken()==true)
+                                        System.out.println("Eliminazione avvenuta con successo.");
                                     continue;
                                 case 5: //esci sezione token
                                     break;
