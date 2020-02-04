@@ -229,6 +229,34 @@ public class QLFApplication {
                                         int id = scannerIO.nextInt();
                                         // qui deve continuare
                                         qLessFood.selezionaPortata(id);
+                                        // continua
+                                    }
+
+                                    // seleziona fascia oraria
+                                    System.out.println("Seleziona fascia oraria: ");
+                                    data = in.readLine();
+                                    Date fascia =new SimpleDateFormat("dd/MM/yyyy").parse(data);
+
+                                    //tipo pagamento
+                                    System.out.println("Seleziona metodo di pagamento [0: ALLA CASSA | 1: ONLINE]");
+                                    int metodo = scannerIO.nextInt();
+                                    if(metodo ==1){
+                                        System.out.println("--- Inserimento Dati Carta --- ");
+                                        System.out.println("Inserisci Numero Carta: ");
+                                        String NumCarta = in.readLine();
+                                        System.out.println("Inserisci Nome Intestatario: ");
+                                        String nome = in.readLine();
+                                        System.out.println("Inserisci Cognome Intestatario");
+                                        String cognome = in.readLine();
+                                        System.out.println("Inserisci CVV");
+                                        int CVV = scannerIO.nextInt();
+                                        System.out.println("Data scadenza: [MM/AA]");
+                                        String dataScadenza = in.readLine();
+
+                                        qLessFood.inserisciDatiCarta(NumCarta, nome, cognome, CVV,dataScadenza);
+
+                                        System.out.println(" Verifica in Corso ... ");
+                                        
                                     }
 
 
