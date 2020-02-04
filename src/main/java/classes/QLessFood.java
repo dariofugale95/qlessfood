@@ -149,7 +149,7 @@ public class QLessFood implements Observer {
 		return null;
 	}
 
-	public Fattura scanQRCode(Ordine o) {
+	public Fattura scanQRCode(int id) {
 		return null;
 	}
 

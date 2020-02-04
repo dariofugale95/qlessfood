@@ -198,10 +198,26 @@ public class QLFApplication {
                                     int ricToken = scannerIO.nextInt();
                                     Token tokenSearch = qLessFood.ricercaToken(ricToken);
                                     System.out.println("Token trovato: "+tokenSearch);
-
-
                                     continue;
                                 case 3: //modifica token
+                                    System.out.println("--- Modifica Token---");
+                                    System.out.println("Che modifica vuoi effettuare?");
+                                    System.out.println("1. Modifica Nome di un Token");
+                                    System.out.println("2. Modifica Numero Pasti di un Token");
+                                    System.out.println("3. Modifica Totale di un Token");
+                                    int modifica = scannerIO.nextInt();
+
+                                    switch(modifica){
+
+                                        case 1:
+                                            System.out.println("Modifica Nome di un Token");
+                                            System.out.println("Inserici il nome del Token da ricercare: ");
+                                            int r = scannerIO.nextInt();
+                                            Token tkn = qLessFood.ricercaToken(r);
+
+                                    }
+
+
                                     continue;
                                 case 4: //eliminazione token
                                     continue;
@@ -226,10 +242,16 @@ public class QLFApplication {
                             System.out.println("--- Visualizza Clienti QLessFood ---");
                             continue;
                         case 5: //Emetti Fattura
-                            Ordine o = new Ordine();
+
                             System.out.println("Scanning QR Code ...");
-                            qLessFood.scanQRCode(o);
-                            System.out.println("Setta come pagato? (premi [y])");
+                            Fattura f = qLessFood.scanQRCode(5);
+                            if(f!=null){
+                                System.out.println("Setta come pagato? (premi [y])");
+                                String set = in.readLine();
+                                if(set=="y"){
+                                    qLessFood.setOrdinePagato(5);
+                                }
+                            }
 
                             continue;
                         case 6: // USCITA PORTALE ADMIN
