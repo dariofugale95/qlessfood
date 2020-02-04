@@ -118,6 +118,7 @@ public class QLessFood implements Observer {
 		statoNuovo.gestioneStatoOrdine(ordine);
 
 		MenuPasto mp = ricercaMenu(Data,Tipologia);
+		ordine.setTotale(mp.getPrezzo());
 		return getListPortate(mp);
 	}
 
@@ -179,6 +180,7 @@ public class QLessFood implements Observer {
 	public int confermaDatiNuovoOrdine(){
 		StatoInPreparazione statoInPreparazione = new StatoInPreparazione();
 		statoInPreparazione.gestioneStatoOrdine(ordine);
+
 		if(listOrdini.add(ordine)){
 			return 1;
 		}
@@ -207,12 +209,37 @@ public class QLessFood implements Observer {
 		return null;
 	}
 
-	public Fattura scanQRCode(Ordine o) {
+	public Fattura scanQRCode(int IdOrdine) {
+		for (Ordine ordine : listOrdini) {
+			if(ordine.getIdOrdine() == IdOrdine){
+				return new Fattura(ordine.isTipoPagamento(),ordine.getTotale());
+			}
+		}
 		return null;
 	}
 
-	public void setOrdinePagato(int IdOrdine) {
+	public void setOrdinePagato(int IdOrdine, String Username) {
+		for (Ordine ordine: listOrdini) {
+			if(ordine.getIdOrdine() == IdOrdine){
+				StatoPagato statoPagato = new StatoPagato();
+				statoPagato.gestioneStatoOrdine(ordine);
 
+				Cliente cliente = getClienteByUsername(Username);
+				if(cliente == null){
+					return;
+				}
+				cliente.setState();
+			}
+		}
+	}
+
+	public Cliente getClienteByUsername(String Username){
+		for(Cliente cliente: listClienti){
+			if(cliente.getUsername().equals(Username)){
+				return cliente;
+			}
+		}
+		return null;
 	}
 
 	public boolean inserisciDatiToken(int Nome, int NumPasti) {

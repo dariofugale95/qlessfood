@@ -15,6 +15,16 @@ public class Ordine {
 
     private boolean TipoPagamento;
 
+    private double Totale = 0;
+
+    public double getTotale() {
+        return Totale;
+    }
+
+    public void setTotale(double totale) {
+        Totale = totale;
+    }
+
     private MenuPasto menuPasto;
 
     private QLessFood qLessFood;
@@ -66,7 +76,7 @@ public class Ordine {
         IdOrdine++;
     }
 
-    public Ordine(int idOrdine, Time fasciaOraria, boolean tipoPagamento) {
+    public Ordine(Time fasciaOraria, boolean tipoPagamento) {
         IdOrdine++;
         FasciaOraria = fasciaOraria;
         TipoPagamento = tipoPagamento;
