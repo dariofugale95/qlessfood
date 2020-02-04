@@ -412,7 +412,7 @@ public class QLFApplication {
                                 int clientScelta = scannerIO.nextInt();
                                 switch(clientScelta) {
 
-                                    case 1:
+                                    case 1: //prenotazione Pasto
                                         System.out.println("Inserisci Data del pasto: ");
                                         data = in.readLine();
                                         date = new SimpleDateFormat("dd/MM/yyyy").parse(data);
@@ -477,6 +477,31 @@ public class QLFApplication {
                                         continue;
                                     case 2:
                                         System.out.println("--- Prenotazione Evento --- ");
+                                        System.out.println("Inserisci il Nome dell'Evento da ricercare: ");
+                                        String ricerca = in.readLine();
+                                        Evento ricercaE = qLessFood.ricercaEvento(ricerca);
+                                        if(ricercaE!=null){
+                                            System.out.println("Evento trovato: ");
+                                            System.out.println("Nome: "+ricercaE.getNome());
+                                            System.out.println("Data: "+ricercaE.getData());
+                                            System.out.println("Posti disponibili: "+ricercaE.getPostiTotali());
+                                            System.out.println("Prezzo:"+ricercaE.getPrezzo());
+                                            System.out.println("Sconto se prenoti con QLessFood:"+ricercaE.getSconto());
+                                            System.out.println("Quanti posti vuoi prenotare?");
+                                            int postiRichiesti = scannerIO.nextInt();
+                                            qLessFood.inserisciPostiPrenotazione(postiRichiesti, ricercaE.getNome(), username);
+                                            double totale = (ricercaE.getPrezzo() - (ricercaE.getPrezzo() * ricercaE.getSconto())/100)*postiRichiesti;
+                                            System.out.println("Riepilogo | Nome Evento: "+ ricercaE.getNome() + "Data: "+ricercaE.getData()+"Costo totale: "+totale);
+                                            System.out.println("Confermare? [y/n]");
+                                            String confermaEvento = in.readLine();
+                                            if(confermaEvento=="y"){
+                                                if(qLessFood.confermaDatiPrenotazione()==1){
+                                                    System.out.println("Prenotazione all'Evento confermata.");
+                                                }
+
+                                            }
+
+                                        }
                                         continue;
 
                                 }
