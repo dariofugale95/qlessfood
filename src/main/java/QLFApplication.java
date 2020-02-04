@@ -35,6 +35,7 @@ public class QLFApplication {
         Date date;
         int nomeTkn;
         int numPastiTkn;
+        List<Portata> listPortate;
 
         while(true) {
 
@@ -112,7 +113,11 @@ public class QLFApplication {
                                     data = in.readLine();
                                     date = new SimpleDateFormat("dd/MM/yyyy").parse(data);
                                     MenuPasto ricercaMenu = qLessFood.ricercaMenu(date, tipo);
-                                    System.out.println("Menu Trovato: " + ricercaMenu);
+                                    listPortate = ricercaMenu.getListPortate();
+                                    System.out.println("Menu Trovato: ");
+                                    for(Portata p : listPortate) {
+                                        System.out.println("ID: "+p.getIdPortata()+" Descrizione: "+p.getDescrizione());
+                                    }
 
                                     continue;
 
@@ -125,12 +130,18 @@ public class QLFApplication {
                                     data = in.readLine();
                                     date = new SimpleDateFormat("dd/MM/yyyy").parse(data);
                                     MenuPasto ricercaMod = qLessFood.ricercaMenu(date, tipos);
+                                    listPortate = ricercaMod.getListPortate();
+
+                                    System.out.println("Menu Trovato: ");
+                                    for(Portata p : listPortate) {
+                                        System.out.println("ID: "+p.getIdPortata()+" Descrizione: "+p.getDescrizione());
+                                    }
                                     System.out.println("Cosa vuoi modificare?");
                                     System.out.println("1. Dati del Menu");
                                     System.out.println("2. Dati delle portate del Menu");
                                     String m = in.readLine();
 
-                                    if (m == "1") { //modifico i dati del menu
+                                    if (m.equals("1")) { //modifico i dati del menu
                                         //new Data, new Tipologia, new Prezzo
                                         System.out.println("Inserisci nuova tipologia [0:PRANZO | 1: CENA]");
                                         int newTipologia = scannerIO.nextInt();
@@ -141,7 +152,7 @@ public class QLFApplication {
                                         double newPrezzo = scannerIO.nextDouble();
                                         qLessFood.modificaMenu(ricercaMod, newDate, newTipologia, newPrezzo);
 
-                                    } else if (m == "2") {//modifico i dati delle portate
+                                    } else if (m.equals("2")) {//modifico i dati delle portate
                                         ArrayList<Portata> listportate = (ArrayList<Portata>) ricercaMod.getListPortate();
                                         System.out.println("Queste sono le portate del Menu: " + listportate);
                                         System.out.println("Inserire id della portata: ");
@@ -422,8 +433,12 @@ public class QLFApplication {
                                         System.out.println("Inserisci tipologia pasto: [0: PRANZO | 1: CENA]");
                                         int ti = scannerIO.nextInt();
                                         MenuPasto m = qLessFood.ricercaMenu(date, ti);
-                                        ArrayList<Portata> listportate = (ArrayList<Portata>) m.getListPortate();
-                                        System.out.println("Queste sono le portate del Menu: " + listportate); //deve essere fatto un foreach ...
+                                        listPortate = m.getListPortate();
+                                        System.out.println("Menu Trovato: ");
+                                        for(Portata p : listPortate) {
+                                            System.out.println("ID: "+p.getIdPortata()+" Descrizione: "+p.getDescrizione());
+                                        }
+
 
 
                                         for (int i = 0; i < 6; i++) {
@@ -463,7 +478,7 @@ public class QLFApplication {
 
 
                                         }
-                                        // conferma dati nuovo Ordine --------- ORDINE?
+
                                         qLessFood.nuovoOrdine(date, ti);
                                         int sconto = qLessFood.getUserToken(username);
 

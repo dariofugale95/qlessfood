@@ -4,7 +4,8 @@ import java.util.Collection;
 
 public class Portata {
 
-	private static int IdPortata = 0;
+	private static int counter =0 ;
+	private int IdPortata;
 
 	private int Tipo;
 
@@ -21,7 +22,8 @@ public class Portata {
 	}
 
 	public Portata(int tipo, String descrizione) {
-		IdPortata++;
+		counter++;
+		IdPortata = counter;
 		Tipo = tipo;
 		Descrizione = descrizione;
 	}

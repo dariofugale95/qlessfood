@@ -120,7 +120,8 @@ public class QLessFood implements Observer {
 	}
 
 	public boolean eliminaMenu(MenuPasto menuPasto) {
-		MenuPasto mp = mapMenuPasto.remove(menuPasto);
+		String IdMenuPasto = menuPasto.getData()+"-"+String.valueOf(menuPasto.getTipologia());
+		MenuPasto mp = mapMenuPasto.remove(IdMenuPasto);
 		if(mp == null){
 			return false;
 		}
@@ -145,9 +146,11 @@ public class QLessFood implements Observer {
 		for (Portata p : listPortate) {
 			if (IdPortata == p.getIdPortata()) {
 				portata = p;
+				ordine.addPortataToMenu(portata);
+				return;
 			}
 		}
-		ordine.addPortataToMenu(portata);
+
 	}
 
 	public List<Portata> getListPortate(MenuPasto menuPasto) {
