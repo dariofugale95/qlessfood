@@ -2,6 +2,8 @@ package classes;
 
 import interfaces.Observable;
 import interfaces.Observer;
+import interfaces.StatoOrdine;
+import org.jdesktop.swingx.tips.TipOfTheDayModel;
 
 import javax.sound.sampled.Port;
 import java.awt.*;
@@ -23,6 +25,15 @@ public class QLessFood implements Observer {
 	private Collection<Token> listToken;
 
 	private List<Cliente> listClienti = new ArrayList<>();
+	private String isPaymentVerified;
+
+	public String getIsPaymentVerified() {
+		return isPaymentVerified;
+	}
+
+	public void setIsPaymentVerified(String isPaymentVerified) {
+		this.isPaymentVerified = isPaymentVerified;
+	}
 
 	public List<Cliente> getListClienti() {
 		return listClienti;
@@ -100,21 +111,31 @@ public class QLessFood implements Observer {
 		return true;
 	}
 
-	/*
+
 	public List<Portata> nuovoOrdine(Date Data, int Tipologia) {
 		ordine = new Ordine();
 		StatoNuovo statoNuovo = new StatoNuovo();
 		statoNuovo.gestioneStatoOrdine(ordine);
 
-		ricercaMenu(Data,Tipologia);
-	}*/
-
-	public void selezionaPortata(int IdPortata) {
-
+		MenuPasto mp = ricercaMenu(Data,Tipologia);
+		ordine.setTotale(mp.getPrezzo());
+		return getListPortate(mp);
 	}
 
-	public List<Portata> getListPortate(Date Data, int Tipologia) {
-		return null;
+	public void selezionaPortata(int IdPortata, Date Data, int Tipologia) {
+		MenuPasto mp = ricercaMenu(Data, Tipologia);
+		List<Portata> listPortate = mp.getListPortate();
+		Portata portata = null;
+		for (Portata p : listPortate) {
+			if (IdPortata == p.getIdPortata()) {
+				portata = p;
+			}
+		}
+		ordine.addPortataToMenu(portata);
+	}
+
+	public List<Portata> getListPortate(MenuPasto menuPasto) {
+		return mapMenuPasto.get(menuPasto).getListPortate();
 	}
 
 	public Portata getPortata(int IdPortata) {
@@ -122,6 +143,7 @@ public class QLessFood implements Observer {
 	}
 
 	public void selezionaFasciaOraria(Time FasciaOraria) {
+		ordine.setFasciaOraria(FasciaOraria);
 
 	}
 
@@ -129,32 +151,95 @@ public class QLessFood implements Observer {
 
 	}
 
-	public void inserisciDatiCarta(String NumCarta, String NomeIntestatario, String CognomeIntestatario, int CVV, String DataScadenza) {
-
+	public String inserisciDatiCarta(String NumCarta, String NomeIntestatario, String CognomeIntestatario, int CVV, String DataScadenza) {
+		String data = "Numero Carta: "+NumCarta+
+				" Nome: "+NomeIntestatario+" Cognome: "+CognomeIntestatario+
+				"CVV: "+String.valueOf(CVV)+" Data di scandenza: "+DataScadenza;
+		this.requestVerification(data);
+		return data;
 	}
 
 	public boolean pagamentoOrdineOnline() {
-		return false;
+		if(this.getIsPaymentVerified() == "verified"){
+			// pagamento online
+			ordine.setTipoPagamento(true);
+			return true;
+		}
+		else{
+			// verifica non andata a buon fine => pagamento in cassa
+			ordine.setTipoPagamento(false);
+			return false;
+		}
 	}
 
-	public void visualizzaCodaOrdini() {
+	public void requestVerification(String DatiCarta){
+		System.out.println("Dati del cliente: "+DatiCarta+" ---- Verificati!");
+		this.setIsPaymentVerified("verified");
+	}
+
+	public int confermaDatiNuovoOrdine(){
+		StatoInPreparazione statoInPreparazione = new StatoInPreparazione();
+		statoInPreparazione.gestioneStatoOrdine(ordine);
+
+		if(listOrdini.add(ordine)){
+			return 1;
+		}
+		else{
+			return 0;
+		}
 
 	}
 
-	public List<Ordine> visualizzaOrdiniInPreparazione(int Stato) {
+	public void visualizzaOrdiniInPreparazione() {
+		for (Ordine ordine: listOrdini) {
+			if(ordine.getStatoOrdine().equals(StatoInPreparazione.class)){
+				System.out.println(ordine.toString());
+			}
+		}
+	}
+
+	public Ordine confermaOrdine(int IdOrdine) {
+		for (Ordine o: listOrdini) {
+			if(ordine.getIdOrdine() == IdOrdine){
+				StatoPronto statoPronto = new StatoPronto();
+				statoPronto.gestioneStatoOrdine(ordine);
+				return ordine;
+			}
+		}
 		return null;
 	}
 
-	public Ordine confermaOrdine() {
+	public Fattura scanQRCode(int IdOrdine) {
+		for (Ordine ordine : listOrdini) {
+			if(ordine.getIdOrdine() == IdOrdine){
+				return new Fattura(ordine.isTipoPagamento(),ordine.getTotale());
+			}
+		}
 		return null;
 	}
 
-	public Fattura scanQRCode(int id) {
-		return null;
+	public void setOrdinePagato(int IdOrdine, String Username) {
+		for (Ordine ordine: listOrdini) {
+			if(ordine.getIdOrdine() == IdOrdine){
+				StatoPagato statoPagato = new StatoPagato();
+				statoPagato.gestioneStatoOrdine(ordine);
+
+				Cliente cliente = getClienteByUsername(Username);
+				if(cliente == null){
+					return;
+				}
+				cliente.setState();
+			}
+		}
 	}
 
-	public void setOrdinePagato(int IdOrdine) {
-
+	public Cliente getClienteByUsername(String Username){
+		for(Cliente cliente: listClienti){
+			if(cliente.getUsername().equals(Username)){
+				return cliente;
+			}
+		}
+		return null;
 	}
 
 	public boolean inserisciDatiToken(int Nome, int NumPasti) {
@@ -274,7 +359,9 @@ public class QLessFood implements Observer {
 	}
 
 	public void visualizzaListaOrdini() {
-
+		for (Ordine o: listOrdini) {
+			System.out.println(o.toString());
+		}
 	}
 
 	public boolean verifyIfToken(Cliente c) {

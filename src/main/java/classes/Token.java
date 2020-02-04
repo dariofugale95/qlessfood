@@ -1,11 +1,8 @@
 package classes;
 
-import interfaces.Observable;
-import interfaces.Observer;
-
 import java.util.Collection;
 
-public class Token implements Observable {
+public class Token{
 
 	private int Nome;
 
@@ -21,7 +18,6 @@ public class Token implements Observable {
 
 	private Collection<Ordine> ordine;
 
-	private Observable observable;
 
 	public Token newToken(int newNome, int newNumPasti) {
 		return null;
@@ -31,31 +27,6 @@ public class Token implements Observable {
 		return false;
 	}
 
-
-	/**
-	 * @see 4-DCD - DiagrammaClassiProgetto.Observable#addObserver(4-DCD - DiagrammaClassiProgetto.Observer)
-	 */
-	public void addObserver(Observer o) {
-
-	}
-
-
-	/**
-	 * @see 4-DCD - DiagrammaClassiProgetto.Observable#deleteObserver(4-DCD - DiagrammaClassiProgetto.Observer)
-	 * 
-	 *  
-	 */
-	public void deleteObserver(Observer o) {
-
-	}
-
-
-	/**
-	 * @see 4-DCD - DiagrammaClassiProgetto.Observable#notifyObserver(4-DCD - DiagrammaClassiProgetto.Observer)
-	 */
-	public void notifyObserver(Observer o) {
-
-	}
 
 	public Token(int nome, int numPasti) {
 		Nome = nome;
@@ -105,11 +76,4 @@ public class Token implements Observable {
 		this.ordine = ordine;
 	}
 
-	public Observable getObservable() {
-		return observable;
-	}
-
-	public void setObservable(Observable observable) {
-		this.observable = observable;
-	}
 }

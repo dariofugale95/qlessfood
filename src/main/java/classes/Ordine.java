@@ -5,6 +5,7 @@ import interfaces.StatoOrdine;
 import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 public class Ordine {
 
@@ -13,6 +14,16 @@ public class Ordine {
     private Time FasciaOraria;
 
     private boolean TipoPagamento;
+
+    private double Totale = 0;
+
+    public double getTotale() {
+        return Totale;
+    }
+
+    public void setTotale(double totale) {
+        Totale = totale;
+    }
 
     private MenuPasto menuPasto;
 
@@ -23,9 +34,17 @@ public class Ordine {
 
     private Collection<Token> token;
 
-    private ArrayList<Portata> listComande;
+    private List<Portata> listComanda = new ArrayList<>();
 
     private Cliente cliente;
+
+    public List<Portata> getListComanda() {
+        return listComanda;
+    }
+
+    public void setListComanda(List<Portata> listComanda) {
+        this.listComanda = listComanda;
+    }
 
     private StatoOrdine statoOrdine;
 
@@ -57,10 +76,14 @@ public class Ordine {
         IdOrdine++;
     }
 
-    public Ordine(int idOrdine, Time fasciaOraria, boolean tipoPagamento) {
+    public Ordine(Time fasciaOraria, boolean tipoPagamento) {
         IdOrdine++;
         FasciaOraria = fasciaOraria;
         TipoPagamento = tipoPagamento;
+    }
+
+    public void addPortataToMenu(Portata portata){
+        listComanda.add(portata);
     }
 
     public Ordine newOrdine() {
@@ -68,6 +91,7 @@ public class Ordine {
     }
 
     public void setFasciaOraria(Time FasciaOraria) {
+        this.FasciaOraria = FasciaOraria;
 
     }
 

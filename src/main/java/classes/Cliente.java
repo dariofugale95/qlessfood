@@ -1,13 +1,26 @@
 package classes;
 
+import interfaces.Observable;
+import interfaces.Observer;
+
 import java.util.Collection;
 
-public class Cliente {
+public class Cliente implements Observable {
     private String Username;
 
     private String Password;
 
     private String Email;
+
+    private int NumOrdini;
+
+    public int getNumOrdini() {
+        return NumOrdini;
+    }
+
+    public void setNumOrdini(int numOrdini) {
+        NumOrdini = numOrdini;
+    }
 
     private Fattura fattura;
 
@@ -26,6 +39,7 @@ public class Cliente {
         Username = username;
         Password = password;
         Email = email;
+        NumOrdini = 0;
     }
 
     public Cliente newCliente(String Username, String Email, String Password) {
@@ -36,8 +50,8 @@ public class Cliente {
      * Incrementa il numero di ordini del cliente
      *
      */
-    public boolean setState() {
-        return false;
+    public void setState() {
+        this.setNumOrdini(this.getNumOrdini()+1);
     }
 
     public void notifyObservers(QLessFood qlf) {
@@ -110,5 +124,33 @@ public class Cliente {
 
     public void setPrenotazione(Prenotazione prenotazione) {
         this.prenotazione = prenotazione;
+    }
+
+    /**
+     * @see 4-DCD - DiagrammaClassiProgetto.Observable#addObserver(4-DCD - DiagrammaClassiProgetto.Observer)
+     */
+    @Override
+    public void addObserver(Observer o) {
+
+    }
+
+
+    /**
+     * @see 4-DCD - DiagrammaClassiProgetto.Observable#deleteObserver(4-DCD - DiagrammaClassiProgetto.Observer)
+     *
+     *
+     */
+    @Override
+    public void deleteObserver(Observer o) {
+
+    }
+
+
+    /**
+     * @see 4-DCD - DiagrammaClassiProgetto.Observable#notifyObserver(4-DCD - DiagrammaClassiProgetto.Observer)
+     */
+    @Override
+    public void notifyObserver(Observer o) {
+
     }
 }
