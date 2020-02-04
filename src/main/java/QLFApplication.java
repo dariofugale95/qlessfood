@@ -225,14 +225,14 @@ public class QLFApplication {
                                             System.out.println("Modifica Nome di un Token");
                                             System.out.println("Inserisci il nuovo nome del token: ");
                                             nomeTkn = scannerIO.nextInt();
-                                            if(qLessFood.modificaNomeToken(nomeTkn)==true)
+                                            if(qLessFood.modificaNomeToken(tknSearch.getNome(),nomeTkn)==true)
                                                 System.out.println("Modifica effettuata con successo.");
                                             continue;
                                         case 2:
                                             System.out.println("Modifica Numero Pasti di un Token");
                                             System.out.println("Inserisci il nuovo numero dei pasti del token: ");
                                              numPastiTkn = scannerIO.nextInt();
-                                            if(qLessFood.modificaNumeroPasti(numPastiTkn)==true)
+                                            if(qLessFood.modificaNumeroPasti(tknSearch.getNome(),numPastiTkn)==true)
                                                 System.out.println("Modifica effettuata con successo.");
                                             continue;
                                         case 3:
@@ -241,7 +241,7 @@ public class QLFApplication {
                                             nomeTkn = scannerIO.nextInt();
                                             System.out.println("Inserisci il nuovo numero dei past del token: ");
                                             numPastiTkn = scannerIO.nextInt();
-                                            if(qLessFood.modificaTutto(nomeTkn,numPastiTkn)==true)
+                                            if(qLessFood.modificaTutto(tknSearch.getNome(),nomeTkn,numPastiTkn)==true)
                                                 System.out.println("Modifica effettuata con successo.");
                                             continue;
                                     }
@@ -251,7 +251,7 @@ public class QLFApplication {
                                     System.out.println("Eliminazione di un Token");
                                     System.out.println("Inserisci il nome del token: ");
                                     nomeTkn = scannerIO.nextInt();
-                                    if(qLessFood.eliminaToken()==true)
+                                    if(qLessFood.eliminaToken(nomeTkn)==true)
                                         System.out.println("Eliminazione avvenuta con successo.");
                                     continue;
                                 case 5: //esci sezione token
