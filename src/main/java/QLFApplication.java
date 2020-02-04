@@ -314,12 +314,67 @@ public class QLFApplication {
                                     System.out.println("Inserisci percentuale di sconto con prenotazione su QLessFood: ");
                                     int percSconto = scannerIO.nextInt();
                                     qLessFood.inserisciDatiEvento(nomeEvento, dataEvento, numPosti, prezzoBiglietto,percSconto);
+                                    System.out.println("Confermare i dati dell'evento? [y/n]");
+                                    conferma = in.readLine();
+                                    if(conferma=="y"){
+                                        if(qLessFood.confermaDatiEvento()==1){
+                                            System.out.println("Dati Evento Confermati");
+                                        }
+                                    }
+
                                     continue;
                                 case 2: //ricerca evento
+                                    System.out.println("--- Ricerca Evento ---");
+                                    System.out.println("Inserisci nome dell'Evento da ricercare: ");
+                                    String nomeRic = in.readLine();
+                                    Evento ricercaEvento = qLessFood.ricercaEvento(nomeRic);
+                                    if(ricercaEvento!=null){
+                                        System.out.println("Evento trovato: "+ ricercaEvento);
+                                    }
                                     continue;
                                 case 3: //modifica evento
+                                    System.out.println("--- Modifica Evento ---");
+                                    System.out.println("Inserisci nome dell'Evento da ricercare: ");
+                                    String nome = in.readLine();
+                                    Evento ricerca = qLessFood.ricercaEvento(nome);
+                                    if(ricerca!=null){
+                                        System.out.println("Evento trovato: "+ ricerca);
+                                        System.out.println("Inserisci nome evento: ");
+                                        String newnomeEvento = in.readLine();
+                                        System.out.println("Inserisci data evento: [dd/MM/yyyy] ");
+                                        String newdataEv = in.readLine();
+                                        Date newdataEvento = new SimpleDateFormat("dd/MM/yyyy").parse(newdataEv);
+                                        System.out.println("Inserisci numero di posti disponibili: ");
+                                        int newnumPosti = scannerIO.nextInt();
+                                        System.out.println("Inserisci prezzo del biglietto: ");
+                                        double newprezzoBiglietto = scannerIO.nextDouble();
+                                        System.out.println("Inserisci percentuale di sconto con prenotazione su QLessFood: ");
+                                        int newpercSconto = scannerIO.nextInt();
+                                        qLessFood.inserisciDatiEvento(newnomeEvento, newdataEvento, newnumPosti, newprezzoBiglietto,newpercSconto);
+                                        System.out.println("Confermare i nuovi dati dell'evento? [y/n]");
+                                        conferma = in.readLine();
+                                        if(conferma=="y"){
+                                            if(qLessFood.confermaDatiEvento()==1){
+                                                qLessFood.confermaEliminaEvento(nome);
+                                                System.out.println("Dati Evento Modificati");
+                                            }
+                                        }
+                                    }
+
                                     continue;
                                 case 4: //elimina evento
+                                    System.out.println("--- Eliminazione Evento");
+                                    System.out.println("Inserisci nome Evento da eliminare: ");
+                                    String eventoElim = in.readLine();
+                                    Evento eventoEliminare = qLessFood.ricercaEvento(eventoElim);
+                                    if(eventoEliminare!=null){
+                                        System.out.println("Evento trovato. Eliminare? [y/n]");
+                                        String con = in.readLine();
+                                        if(con=="y"){
+                                            qLessFood.confermaEliminaEvento(eventoElim);
+                                        }
+
+                                    }
                                     continue;
                                 case 5: // esci evento
                                     break;
