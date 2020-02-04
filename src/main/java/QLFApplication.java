@@ -3,6 +3,7 @@ import classes.MenuPasto;
 import classes.Portata;
 import classes.QLessFood;
 
+import javax.sound.sampled.Port;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -20,6 +21,8 @@ public class QLFApplication {
         qLessFood = qLessFood.getInstance();
 
         Cliente c = new Cliente();
+
+
         HashMap<Integer,String> portateMenu = new HashMap<Integer,String>();
         portateMenu.put(0, "Primo");
         portateMenu.put(1, "Secondo");
@@ -27,6 +30,9 @@ public class QLFApplication {
         portateMenu.put(3, "Bevanda");
         portateMenu.put(4, "Dolce");
         portateMenu.put(5, "Frutta");
+
+        String data;
+        Date date;
 
 
             System.out.println("QLessFood --- Effettì Mense 2020");
@@ -73,8 +79,8 @@ public class QLFApplication {
                                         System.out.println("Inserisci Tipologia: [0: PRANZO | 1: CENA]");
                                         int tipologia = scannerIO.nextInt();
                                         System.out.println("Inserisci Data: [dd/MM/yyyy]");
-                                        String data = in.readLine();
-                                        Date date =new SimpleDateFormat("dd/MM/yyyy").parse(data);
+                                        data = in.readLine();
+                                        date =new SimpleDateFormat("dd/MM/yyyy").parse(data);
                                         System.out.println("Inserisci prezzo del Menu");
                                         double prezzo = scannerIO.nextDouble();
                                         qLessFood.inserisciMenu(date, tipologia, prezzo);
@@ -99,9 +105,9 @@ public class QLFApplication {
                                         System.out.println("Inserisci Tipologia del Pasto da ricercare[0: PRANZO | 1: CENA]");
                                         int tipo = scannerIO.nextInt();
                                         System.out.println("Inserisci Data del Pasto da ricercare: [dd/MM/yyyy]");
-                                        String dd = in.readLine();
-                                        Date ddd =new SimpleDateFormat("dd/MM/yyyy").parse(dd);
-                                        MenuPasto ricercaMenu = qLessFood.ricercaMenu(ddd, tipo);
+                                        data = in.readLine();
+                                        date =new SimpleDateFormat("dd/MM/yyyy").parse(data);
+                                        MenuPasto ricercaMenu = qLessFood.ricercaMenu(date, tipo);
                                         System.out.println("Menu Trovato: "+ ricercaMenu);
 
                                         continue;
@@ -112,9 +118,9 @@ public class QLFApplication {
                                         System.out.println("Inserisci Tipologia del Pasto da ricercare[0: PRANZO | 1: CENA]");
                                         int tipos = scannerIO.nextInt();
                                         System.out.println("Inserisci Data del Pasto da ricercare: [dd/MM/yyyy]");
-                                        String datass = in.readLine();
-                                        Date dates =new SimpleDateFormat("dd/MM/yyyy").parse(datass);
-                                        MenuPasto ricercaMod = qLessFood.ricercaMenu(dates, tipos);
+                                        data = in.readLine();
+                                        date =new SimpleDateFormat("dd/MM/yyyy").parse(data);
+                                        MenuPasto ricercaMod = qLessFood.ricercaMenu(date, tipos);
                                         System.out.println("Cosa vuoi modificare?");
                                         System.out.println("1. Dati del Menu");
                                         System.out.println("2. Dati delle portate del Menu");
@@ -204,9 +210,31 @@ public class QLFApplication {
                                 System.out.println("Inserisci password: ");
                                 String password = in.readLine();
                                 c = qLessFood.ricercaCliente(username);
+
                                 if (c != null) {
                                     System.out.println("**** AREA CLIENTI ****** ");
                                     System.out.println("Prenotazione di un Pasto da Effettì Mense");
+                                    System.out.println("Inserisci Data del pasto: ");
+                                    data = in.readLine();
+                                    date =new SimpleDateFormat("dd/MM/yyyy").parse(data);
+                                    System.out.println("Inserisci tipologia pasto: [0: PRANZO | 1: CENA]");
+                                    int ti = scannerIO.nextInt();
+                                    MenuPasto m = qLessFood.ricercaMenu(date, ti);
+                                    ArrayList<Portata> listportate = (ArrayList<Portata>) m.getListPortate();
+                                    System.out.println("Queste sono le portate del Menu: "+ listportate);
+
+
+                                    for(int i=0;i<6;i++){
+                                        System.out.println("Inserisci id portata: ");
+                                        int id = scannerIO.nextInt();
+                                        // qui deve continuare
+                                        qLessFood.selezionaPortata(id);
+                                    }
+
+
+
+
+
 
 
                                 }
