@@ -366,7 +366,18 @@ public class QLFApplication {
                                 }
                                 // conferma dati nuovo Ordine --------- ORDINE?
                                 qLessFood.nuovoOrdine(date, ti);
-                                
+                                int sconto=qLessFood.getUserToken(username);
+
+                                if(sconto!=0){
+                                    System.out.println("Gentile " +username+"Hai il Token-"+sconto);
+                                    System.out.println("Vuoi utilizzarlo? [y/n]");
+                                    String risp = in.readLine();
+                                    if(risp=="y"){
+                                        qLessFood.utilizzaToken(sconto, 5);
+                                        qLessFood.confermaUtilizzoToken(username);
+                                    }
+                                }
+                                qLessFood.confermaDatiNuovoOrdine();
 
                             }
                             continue;
