@@ -2,6 +2,7 @@ package classes;
 
 import interfaces.Observable;
 import interfaces.Observer;
+import interfaces.StatoOrdine;
 import org.jdesktop.swingx.tips.TipOfTheDayModel;
 
 import javax.sound.sampled.Port;
@@ -187,15 +188,22 @@ public class QLessFood implements Observer {
 
 	}
 
-	public void visualizzaCodaOrdini() {
-
+	public void visualizzaOrdiniInPreparazione() {
+		for (Ordine ordine: listOrdini) {
+			if(ordine.getStatoOrdine().equals(StatoInPreparazione.class)){
+				System.out.println(ordine.toString());
+			}
+		}
 	}
 
-	public List<Ordine> visualizzaOrdiniInPreparazione(int Stato) {
-		return null;
-	}
-
-	public Ordine confermaOrdine() {
+	public Ordine confermaOrdine(int IdOrdine) {
+		for (Ordine o: listOrdini) {
+			if(ordine.getIdOrdine() == IdOrdine){
+				StatoPronto statoPronto = new StatoPronto();
+				statoPronto.gestioneStatoOrdine(ordine);
+				return ordine;
+			}
+		}
 		return null;
 	}
 
@@ -324,7 +332,9 @@ public class QLessFood implements Observer {
 	}
 
 	public void visualizzaListaOrdini() {
-
+		for (Ordine o: listOrdini) {
+			System.out.println(o.toString());
+		}
 	}
 
 	public boolean verifyIfToken(Cliente c) {
