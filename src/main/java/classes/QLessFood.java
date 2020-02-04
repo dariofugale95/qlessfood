@@ -24,6 +24,7 @@ public class QLessFood implements Observer {
 
 	private Token token;
 	private Cliente cliente;
+	private Evento evento;
 
 	public Token getToken() {
         return token;
@@ -391,20 +392,28 @@ public class QLessFood implements Observer {
 
 	}
 
-	public boolean inserisciDatiEvento(String Nome, Date Data, int PostiTotali, double Prezzo, int Sconto) {
-		return false;
+	public void inserisciDatiEvento(String Nome, Date Data, int PostiTotali, double Prezzo, int Sconto) {
+		this.evento = new Evento(Nome, Data, PostiTotali, Prezzo, Sconto);
 	}
+
 
 	public int confermaDatiEvento() {
-		return 0;
+		listEventi.add(this.evento);
+		return 1;
 	}
 
-	public Evento ricercaEvento(Date Data) {
+	public Evento ricercaEvento(String NomeEvento) {
+		for(Evento evento : listEventi){
+			if(evento.getNome() == NomeEvento){
+				return evento;
+			}
+		}
 		return null;
 	}
 
-	public boolean confermaEliminaEvento() {
-		return false;
+	public boolean confermaEliminaEvento(String NomeEvento) {
+		Evento evento = ricercaEvento(NomeEvento);
+		return listEventi.remove(evento);
 	}
 
 	public void selezionaEvento(Date Data) {
