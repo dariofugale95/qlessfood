@@ -39,7 +39,7 @@ public class QLFApplication {
         while(true) {
 
             System.out.println("QLessFood --- Effettì Mense 2020");
-            System.out.println("ACCEDI . . . ");
+            System.out.println("Seleziona l'Area d'Accesso");
             System.out.println("1. Admin access");
             System.out.println("2. Client access");
             System.out.println("3. Esci");
@@ -275,7 +275,10 @@ public class QLFApplication {
                         case 4: //visualizza Clienti QLessFood
                             System.out.println("--- Visualizza Clienti QLessFood ---");
                             List<Cliente> Users = qLessFood.getListClienti();
-                            System.out.println("Lista clienti: "+Users);
+                            // sono qui
+                            for(Cliente cliente : Users) {
+                                System.out.println(cliente.getUsername());
+                            }
                             continue;
                         case 5: //Emetti Fattura
 
@@ -475,7 +478,7 @@ public class QLFApplication {
                                         }
                                         qLessFood.confermaDatiNuovoOrdine();
                                         continue;
-                                    case 2:
+                                    case 2: // prenotazione evento
                                         System.out.println("--- Prenotazione Evento --- ");
                                         System.out.println("Inserisci il Nome dell'Evento da ricercare: ");
                                         String ricerca = in.readLine();
@@ -511,6 +514,7 @@ public class QLFApplication {
                             }
 
                         case 2: // Register
+                            System.out.println("--- Registrazione Cliente ---");
                             System.out.println("Inserisci username: ");
                             String u = in.readLine();
                             System.out.println("Inserisci email: ");
