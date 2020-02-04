@@ -1,9 +1,11 @@
 package classes;
 
+import interfaces.StatoOrdine;
+
 import java.sql.Time;
 import java.util.Collection;
 
-public class Ordine extends StatoOrdine{
+public class Ordine {
 
     private static int IdOrdine=0;
 
@@ -23,6 +25,14 @@ public class Ordine extends StatoOrdine{
     private Cliente cliente;
 
     private StatoOrdine statoOrdine;
+
+    public StatoOrdine getStatoOrdine() {
+        return statoOrdine;
+    }
+
+    public void setStatoOrdine(StatoOrdine statoOrdine) {
+        this.statoOrdine = statoOrdine;
+    }
 
     public int getIdOrdine() {
         return IdOrdine;
@@ -70,8 +80,4 @@ public class Ordine extends StatoOrdine{
 
     }
 
-    @Override
-    public void gestioneStatoOrdine() {
-
-    }
 }

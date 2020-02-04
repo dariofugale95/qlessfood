@@ -103,8 +103,10 @@ public class QLessFood implements Observer {
 	/*
 	public List<Portata> nuovoOrdine(Date Data, int Tipologia) {
 		ordine = new Ordine();
+		StatoNuovo statoNuovo = new StatoNuovo();
+		statoNuovo.gestioneStatoOrdine(ordine);
+
 		ricercaMenu(Data,Tipologia);
-		ordine.gestioneStatoOrdine();
 	}*/
 
 	public void selezionaPortata(int IdPortata) {

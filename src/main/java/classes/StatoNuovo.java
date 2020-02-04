@@ -1,8 +1,11 @@
 package classes;
 
-public class StatoNuovo extends StatoOrdine {
+import interfaces.StatoOrdine;
+
+public class StatoNuovo implements StatoOrdine {
 
     @Override
-    public void gestioneStatoOrdine() {
+    public void gestioneStatoOrdine(Ordine ordine) {
+        ordine.setStatoOrdine(this);
     }
 }
