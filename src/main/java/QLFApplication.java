@@ -280,7 +280,7 @@ public class QLFApplication {
                             System.out.println("Per confermare l'ordine, premere [y]");
                             String conferma = in.readLine();
                             if(conferma.equals("y"))
-                                qLessFood.confermaOrdine(5);
+                                qLessFood.confermaOrdine(1);
                             System.out.println("Ordine confermato. Verrà generato un QRCode a breve.");
                             continue;
                         case 4: //visualizza Clienti QLessFood
@@ -294,13 +294,12 @@ public class QLFApplication {
                         case 5: //Emetti Fattura
 
                             System.out.println("Scanning QR Code ...");
-                            String  usr = "ciao";
-                            Fattura f = qLessFood.scanQRCode(5);
+                            Fattura f = qLessFood.scanQRCode(1);
                             if(f!=null){
                                 System.out.println("Setta come pagato? (premi [y])");
                                 String set = in.readLine();
                                 if(set.equals("y")){
-                                    qLessFood.setOrdinePagato(5, usr);
+                                    qLessFood.setOrdinePagato(1, c.getUsername());
                                 }
                             }
 
@@ -472,6 +471,7 @@ public class QLFApplication {
                                             qLessFood.inserisciDatiCarta(NumCarta, nome, cognome, CVV, dataScadenza);
 
                                             System.out.println(" Verifica in Corso ... ");
+                                            qLessFood.pagamentoOrdineOnline();
                                             TimeUnit.SECONDS.sleep(2);
                                             System.out.println("Pagamento effettuato con successo.");
 

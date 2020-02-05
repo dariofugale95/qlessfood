@@ -197,6 +197,7 @@ public class QLessFood implements Observer {
 	}
 
 	public int confermaDatiNuovoOrdine(){
+		System.out.println(ordine.getIdOrdine());
 		StatoInPreparazione statoInPreparazione = new StatoInPreparazione();
 		statoInPreparazione.gestioneStatoOrdine(ordine);
 
@@ -445,7 +446,7 @@ public class QLessFood implements Observer {
 
 	public void visualizzaListaOrdini() {
 		for (Ordine o: listOrdini) {
-			System.out.println(o.toString());
+			System.out.println(o.getIdOrdine());
 		}
 	}
 
