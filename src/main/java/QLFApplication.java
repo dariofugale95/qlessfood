@@ -204,7 +204,7 @@ public class QLFApplication {
                                     System.out.println("Dati inseriti: Nome: Token-"+NomeToken+" Numero Pasti: "+NumPasti);
                                     System.out.println("Confermi? [y/n]");
                                     String conferma = in.readLine();
-                                    if(conferma=="y"){
+                                    if(conferma.equals("y")){
                                         if(qLessFood.confermaDatiToken()==1)
                                             System.out.println("Token inserito con successo nella Lista dei Token di QLessFood.");
                                     }
@@ -215,7 +215,7 @@ public class QLFApplication {
                                     System.out.println("Inserici il nome del Token da ricercare: ");
                                     int ricToken = scannerIO.nextInt();
                                     Token tokenSearch = qLessFood.ricercaToken(ricToken);
-                                    System.out.println("Token trovato: "+tokenSearch);
+                                    System.out.println("Token trovato: "+tokenSearch.getNome()+" Num Pasti: "+tokenSearch.getNumPasti());
                                     continue;
 
 
@@ -224,7 +224,7 @@ public class QLFApplication {
                                     System.out.println("Inserici il nome del Token da ricercare: ");
                                     int r = scannerIO.nextInt();
                                     Token tknSearch = qLessFood.ricercaToken(r);
-                                    System.out.println("Token trovato: "+tknSearch);
+                                    System.out.println("Token trovato: "+tknSearch.getNome()+" Num Pasti: "+tknSearch.getNumPasti());
                                     System.out.println("Che modifica vuoi effettuare?");
                                     System.out.println("1. Modifica Nome di un Token");
                                     System.out.println("2. Modifica Numero Pasti di un Token");
@@ -279,7 +279,7 @@ public class QLFApplication {
                             qLessFood.visualizzaOrdiniInPreparazione();
                             System.out.println("Per confermare l'ordine, premere [y]");
                             String conferma = in.readLine();
-                            if(conferma=="y")
+                            if(conferma.equals("y"))
                                 qLessFood.confermaOrdine(5);
                             System.out.println("Ordine confermato. Verrà generato un QRCode a breve.");
                             continue;
@@ -299,7 +299,7 @@ public class QLFApplication {
                             if(f!=null){
                                 System.out.println("Setta come pagato? (premi [y])");
                                 String set = in.readLine();
-                                if(set=="y"){
+                                if(set.equals("y")){
                                     qLessFood.setOrdinePagato(5, usr);
                                 }
                             }
@@ -330,7 +330,7 @@ public class QLFApplication {
                                     qLessFood.inserisciDatiEvento(nomeEvento, dataEvento, numPosti, prezzoBiglietto,percSconto);
                                     System.out.println("Confermare i dati dell'evento? [y/n]");
                                     conferma = in.readLine();
-                                    if(conferma=="y"){
+                                    if(conferma.equals("y")){
                                         if(qLessFood.confermaDatiEvento()==1){
                                             System.out.println("Dati Evento Confermati");
                                         }
@@ -367,7 +367,7 @@ public class QLFApplication {
                                         qLessFood.inserisciDatiEvento(newnomeEvento, newdataEvento, newnumPosti, newprezzoBiglietto,newpercSconto);
                                         System.out.println("Confermare i nuovi dati dell'evento? [y/n]");
                                         conferma = in.readLine();
-                                        if(conferma=="y"){
+                                        if(conferma.equals("y")){
                                             if(qLessFood.confermaDatiEvento()==1){
                                                 qLessFood.confermaEliminaEvento(nome);
                                                 System.out.println("Dati Evento Modificati");
@@ -384,7 +384,7 @@ public class QLFApplication {
                                     if(eventoEliminare!=null){
                                         System.out.println("Evento trovato. Eliminare? [y/n]");
                                         String con = in.readLine();
-                                        if(con=="y"){
+                                        if(con.equals("y")){
                                             qLessFood.confermaEliminaEvento(eventoElim);
                                         }
 
@@ -432,14 +432,13 @@ public class QLFApplication {
                                         date = new SimpleDateFormat("dd/MM/yyyy").parse(data);
                                         System.out.println("Inserisci tipologia pasto: [0: PRANZO | 1: CENA]");
                                         int ti = scannerIO.nextInt();
+                                        qLessFood.nuovoOrdine(date, ti);
                                         MenuPasto m = qLessFood.ricercaMenu(date, ti);
                                         listPortate = m.getListPortate();
                                         System.out.println("Menu Trovato: ");
                                         for(Portata p : listPortate) {
                                             System.out.println("ID: "+p.getIdPortata()+" Descrizione: "+p.getDescrizione());
                                         }
-
-
 
                                         for (int i = 0; i < 6; i++) {
                                             System.out.println("Inserisci id portata: ");
@@ -486,7 +485,7 @@ public class QLFApplication {
                                             System.out.println("Gentile " + username + "Hai il Token-" + sconto);
                                             System.out.println("Vuoi utilizzarlo? [y/n]");
                                             String risp = in.readLine();
-                                            if (risp == "y") {
+                                            if (risp.equals("y")) {
                                                 qLessFood.utilizzaToken(sconto, 5);
                                                 qLessFood.confermaUtilizzoToken(username);
                                             }
@@ -512,7 +511,7 @@ public class QLFApplication {
                                             System.out.println("Riepilogo | Nome Evento: "+ ricercaE.getNome() + "Data: "+ricercaE.getData()+"Costo totale: "+totale);
                                             System.out.println("Confermare? [y/n]");
                                             String confermaEvento = in.readLine();
-                                            if(confermaEvento=="y"){
+                                            if(confermaEvento.equals("y")){
                                                 if(qLessFood.confermaDatiPrenotazione()==1){
                                                     System.out.println("Prenotazione all'Evento confermata.");
                                                 }

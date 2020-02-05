@@ -136,7 +136,7 @@ public class QLessFood implements Observer {
 
 		MenuPasto mp = ricercaMenu(Data,Tipologia);
 		ordine.setTotale(mp.getPrezzo());
-		return getListPortate(mp);
+		return this.getListPortate(mp);
 	}
 
 	public void selezionaPortata(int IdPortata, Date Data, int Tipologia) {
