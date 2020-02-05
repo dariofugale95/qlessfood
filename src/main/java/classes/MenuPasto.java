@@ -1,43 +1,84 @@
 package classes;
 
-import java.util.Collection;
+import java.util.*;
 
 public class MenuPasto {
 
-	private DateTime Data;
+	private Date Data;
 
 	private int Tipologia;
 
 	private double Prezzo;
 
-	private QLessFood qLessFood;
+	private List<Portata> listPortate = new ArrayList<>();
 
-	private Menù menù;
+	public MenuPasto(Date data, int tipologia, double prezzo) {
+		this.Data = data;
+		this.Tipologia = tipologia;
+		this.Prezzo = prezzo;
+	}
 
-	private Collection<Menù> menù;
+	public Date getData() {
+		return Data;
+	}
 
-	private Collection<Ordine> ordine;
+	public int getTipologia() {
+		return Tipologia;
+	}
 
-	private Portata listPortate {list};
+	public void setTipologia(int tipologia) {
+		Tipologia = tipologia;
+	}
 
-	private QLessFood qLessFood;
+	public double getPrezzo() {
+		return Prezzo;
+	}
 
-	private Collection<Ordine> ordine;
+	public void setPrezzo(double prezzo) {
+		Prezzo = prezzo;
+	}
 
-	public MenuPasto newMenu(DateTime Data, int Tipologia, double Prezzo, int ListaIdPortate) {
+	public List<Portata> getListPortate() {
+		return listPortate;
+	}
+
+	public void setListPortate(List<Portata> listPortate) {
+		this.listPortate = listPortate;
+	}
+
+	public MenuPasto newMenu(Date Data, int Tipologia, double Prezzo, List<Integer> ListaIdPortate) {
 		return null;
 	}
 
 	public boolean addToMenu(int Tipo, String Descrizione) {
+		Portata portata = new Portata(Tipo, Descrizione);
+		if(listPortate.add(portata))
+			return true;
 		return false;
 	}
 
-	public void addPortata(Portata p) {
 
+	public boolean updatePortata(int IdPortataOld, int newTipo, String newDescrizione) {
+		Portata newPortata = new Portata(newTipo, newDescrizione);
+		int index = 0;
+		Portata oldPortata = null;
+		for (Portata portata : listPortate) {
+			if (portata.getIdPortata() == IdPortataOld) {
+				oldPortata = listPortate.get(index);
+				break;
+			}
+			index++;
+		}
+
+		return Collections.replaceAll(listPortate, oldPortata, newPortata);
 	}
 
-	public boolean removeMenu() {
+	public boolean removePortata(int IdPortata) {
+		for(Portata portata : listPortate){
+			if(portata.getIdPortata() == IdPortata){
+				return listPortate.remove(portata);
+			}
+		}
 		return false;
 	}
-
 }

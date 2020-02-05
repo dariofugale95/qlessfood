@@ -4,11 +4,8 @@ import interfaces.StatoOrdine;
 
 public class StatoInPreparazione implements StatoOrdine {
 
-	/**
-	 *  
-	 */
-	public void gestioneStatoOrdine() {
-
+	@Override
+	public void gestioneStatoOrdine(Ordine ordine) {
+		ordine.setStatoOrdine(this);
 	}
-
 }

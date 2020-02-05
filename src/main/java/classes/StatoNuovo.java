@@ -4,8 +4,8 @@ import interfaces.StatoOrdine;
 
 public class StatoNuovo implements StatoOrdine {
 
-	public void gestioneStatoOrdine() {
-
-	}
-
+    @Override
+    public void gestioneStatoOrdine(Ordine ordine) {
+        ordine.setStatoOrdine(this);
+    }
 }
