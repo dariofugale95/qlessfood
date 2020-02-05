@@ -5,9 +5,13 @@ import java.util.*;
 public class Evento {
 
 	private String Nome;
+
 	private Date Data;
+
 	private int PostiTotali;
+
 	private double Prezzo;
+
 	private int Sconto;
 
 	public Evento() {
@@ -63,11 +67,6 @@ public class Evento {
 
 	private Map<String,Prenotazione> mapUserPrenotazioni = new HashMap<>();
 
-	private QLessFood qLessFood;
-
-	public Evento newEvento(String Nome, Date Data, int PostiTotali, double Prezzo, int Sconto) {
-		return null;
-	}
 
 	public void aggiungiPrenotazione(Prenotazione pr) {
 		double prezzoScontato = calcolaPrezzoTotale(pr.getQuantitaRichiesta(), this.getPrezzo(), this.getSconto());
@@ -83,10 +82,6 @@ public class Evento {
 
 	public void decreasePostiTotali(int QuantitaRichiesta) {
 		this.setPostiTotali(this.getPostiTotali()-QuantitaRichiesta);
-	}
-
-	public void getMappaPrenotazioni() {
-
 	}
 
 	public void visualizzaMappaPrenotazioni() {

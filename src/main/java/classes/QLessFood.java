@@ -17,14 +17,19 @@ public class QLessFood implements Observer {
 	private static QLessFood qLessFood; //intanze singleton
 
 	private MenuPasto menuPasto;
+
 	private Map<String, MenuPasto> mapMenuPasto = new HashMap<>();
 
 	private Ordine ordine;
+
 	private List<Ordine> listOrdini = new ArrayList<>();
 
 	private Token token;
+
 	private Cliente cliente;
+
 	private Evento evento;
+
 	private Prenotazione prenotazione;
 
 	public Token getToken() {
@@ -72,10 +77,6 @@ public class QLessFood implements Observer {
 		return qLessFood;
 	}
 
-	public void gestisciMenu(String scelta) {
-
-	}
-
 	public void inserisciMenu(Date Data, int Tipologia, double Prezzo) {
 		menuPasto = new MenuPasto(Data, Tipologia, Prezzo);
 	}
@@ -104,19 +105,12 @@ public class QLessFood implements Observer {
 		return menuPasto.addToMenu(Tipo,Descrizione);
 	}
 
-	public void modificaPortata(String SceltaPortata) {
-	}
-
 	public boolean eliminaPortata(int IdPortata) {
 		return menuPasto.removePortata(IdPortata);
 	}
 
 	public boolean modificaDatiPortata(int IdPortataOld, int newTipo, String newDescrizione) {
 		return menuPasto.updatePortata(IdPortataOld, newTipo, newDescrizione);
-	}
-
-	public boolean removePortata(int IdPortata) {
-		return false;
 	}
 
 	public boolean eliminaMenu(MenuPasto menuPasto) {
@@ -157,16 +151,8 @@ public class QLessFood implements Observer {
 		return menuPasto.getListPortate();
 	}
 
-	public Portata getPortata(int IdPortata) {
-		return null;
-	}
-
 	public void selezionaFasciaOraria(Time FasciaOraria) {
 		ordine.setFasciaOraria(FasciaOraria);
-
-	}
-
-	public void sceltaMetodoPagamento(boolean Scelta) {
 
 	}
 
@@ -272,10 +258,6 @@ public class QLessFood implements Observer {
         }
 	}
 
-	public void gestisciToken(String Scelta) {
-
-	}
-
 	public int confermaDatiToken() {
 	    if(token == null){
 	        return 0;
@@ -354,10 +336,6 @@ public class QLessFood implements Observer {
 		return value;
 	}
 
-	public void gestisciCliente(String Scelta) {
-
-	}
-
 	public void inserisciDatiCliente(String Username, String Email, String Password) {
 		cliente = new Cliente(Username, Email, Password);
 
@@ -367,8 +345,6 @@ public class QLessFood implements Observer {
 		listClienti.add(this.cliente);
 		return 1;
 	}
-
-
 
 	public Cliente ricercaCliente(String Username) {
 		for(Cliente cliente : listClienti){
@@ -394,9 +370,6 @@ public class QLessFood implements Observer {
 		return prezzo-((prezzo*NomeToken)/100);
 	}
 
-	public void gestisciEvento(String Scelta) {
-
-	}
 
 	public void inserisciDatiEvento(String Nome, Date Data, int PostiTotali, double Prezzo, int Sconto) {
 		this.evento = new Evento(Nome, Data, PostiTotali, Prezzo, Sconto);
@@ -420,10 +393,6 @@ public class QLessFood implements Observer {
 	public boolean confermaEliminaEvento(String NomeEvento) {
 		Evento evento = ricercaEvento(NomeEvento);
 		return listEventi.remove(evento);
-	}
-
-	public void selezionaEvento(Date Data) {
-
 	}
 
 	public void inserisciPostiPrenotazione(int QuantitaRichiesta, String NomeEventoRichiesto, String Username) {

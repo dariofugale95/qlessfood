@@ -18,8 +18,6 @@ public class MenuPasto {
 		this.Prezzo = prezzo;
 	}
 
-	private QLessFood qLessFood;
-
 	public Date getData() {
 		return Data;
 	}
@@ -40,15 +38,6 @@ public class MenuPasto {
 		Prezzo = prezzo;
 	}
 
-
-	public Collection<Ordine> getOrdine() {
-		return ordine;
-	}
-
-	public void setOrdine(Collection<Ordine> ordine) {
-		this.ordine = ordine;
-	}
-
 	public List<Portata> getListPortate() {
 		return listPortate;
 	}
@@ -56,16 +45,6 @@ public class MenuPasto {
 	public void setListPortate(List<Portata> listPortate) {
 		this.listPortate = listPortate;
 	}
-
-	public QLessFood getqLessFood() {
-		return qLessFood;
-	}
-
-	public void setqLessFood(QLessFood qLessFood) {
-		this.qLessFood = qLessFood;
-	}
-
-	private Collection<Ordine> ordine;
 
 	public MenuPasto newMenu(Date Data, int Tipologia, double Prezzo, List<Integer> ListaIdPortate) {
 		return null;

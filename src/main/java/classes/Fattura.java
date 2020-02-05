@@ -3,8 +3,14 @@ package classes;
 public class Fattura {
 
     private static long IdFattura=0;
+
     private boolean TipoPagamento;
+
     private double Totale;
+
+    private Cliente cliente;
+
+    private Ordine ordine;
 
     public Fattura() {
         IdFattura++;
@@ -40,10 +46,6 @@ public class Fattura {
         Totale = totale;
     }
 
-    private Cliente cliente;
-
-    private Ordine ordine;
-
     public Cliente getCliente() {
         return cliente;
     }
@@ -60,7 +62,4 @@ public class Fattura {
         this.ordine = ordine;
     }
 
-    public Fattura newFattura(boolean TipoPagamento, double Totale) {
-        return null;
-    }
 }
