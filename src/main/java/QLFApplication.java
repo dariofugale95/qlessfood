@@ -479,15 +479,16 @@ public class QLFApplication {
                                         }
 
                                         qLessFood.confermaDatiNuovoOrdine();
-                                      //  int sconto = qLessFood.getUserToken(username);
-                                        int sconto =10;
+                                        Cliente cliente = qLessFood.ricercaCliente(username);
+                                        qLessFood.verifyIfTokenStartup(cliente);
+                                        int sconto = qLessFood.getUserToken(username);
 
                                         if (sconto != 0) {
                                             System.out.println("Gentile " + username + "Hai il Token-" + sconto);
                                             System.out.println("Vuoi utilizzarlo? [y/n]");
                                             String risp = in.readLine();
                                             if (risp.equals("y")) {
-                                                qLessFood.utilizzaToken(sconto, 5);
+                                                qLessFood.utilizzaToken(sconto, 0);
                                                 qLessFood.confermaUtilizzoToken(username);
                                             }
                                         }

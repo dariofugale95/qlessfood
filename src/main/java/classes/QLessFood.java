@@ -460,6 +460,10 @@ public class QLessFood implements Observer {
         return false;
 	}
 
+	public void verifyIfTokenStartup(Cliente c){
+		mapUserToken.put(c.getUsername(),0);
+	}
+
 
 	/**
 	 * @see 4-DCD - DiagrammaClassiProgetto.Observer#update(4-DCD - DiagrammaClassiProgetto.Observable, Object)
