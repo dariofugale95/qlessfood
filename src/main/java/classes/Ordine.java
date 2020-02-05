@@ -10,6 +10,7 @@ import java.util.List;
 public class Ordine {
 
     private static int counter=0;
+
     private int IdOrdine;
 
     private Time FasciaOraria;
@@ -80,7 +81,7 @@ public class Ordine {
 
     public Ordine(Time fasciaOraria, boolean tipoPagamento) {
         counter++;
-        IdOrdine=counter;
+        IdOrdine = counter;
         FasciaOraria = fasciaOraria;
         TipoPagamento = tipoPagamento;
     }
