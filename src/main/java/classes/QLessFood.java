@@ -349,7 +349,8 @@ public class QLessFood implements Observer {
 	}
 
 	public int getUserToken(String Username){
-		return mapUserToken.get(Username);
+		int value = mapUserToken.get(Username);
+		return value;
 	}
 
 	public void gestisciCliente(String Scelta) {

@@ -449,7 +449,7 @@ public class QLFApplication {
                                         }
 
                                         // seleziona fascia oraria
-                                        System.out.println("Seleziona fascia oraria: ");
+                                        System.out.println("Seleziona fascia oraria [FORMATO dd/mm/yyyy]: ");
                                         data = in.readLine();
                                         Date fascia = new SimpleDateFormat("dd/MM/yyyy").parse(data);
 
@@ -479,7 +479,8 @@ public class QLFApplication {
                                         }
 
                                         qLessFood.confermaDatiNuovoOrdine();
-                                        int sconto = qLessFood.getUserToken(username);
+                                      //  int sconto = qLessFood.getUserToken(username);
+                                        int sconto =10;
 
                                         if (sconto != 0) {
                                             System.out.println("Gentile " + username + "Hai il Token-" + sconto);
