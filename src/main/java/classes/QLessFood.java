@@ -154,7 +154,7 @@ public class QLessFood implements Observer {
 	}
 
 	public List<Portata> getListPortate(MenuPasto menuPasto) {
-		return mapMenuPasto.get(menuPasto).getListPortate();
+		return menuPasto.getListPortate();
 	}
 
 	public Portata getPortata(int IdPortata) {

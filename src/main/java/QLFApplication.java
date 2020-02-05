@@ -432,6 +432,7 @@ public class QLFApplication {
                                         date = new SimpleDateFormat("dd/MM/yyyy").parse(data);
                                         System.out.println("Inserisci tipologia pasto: [0: PRANZO | 1: CENA]");
                                         int ti = scannerIO.nextInt();
+                                        qLessFood.nuovoOrdine(date,ti);
                                         MenuPasto m = qLessFood.ricercaMenu(date, ti);
                                         listPortate = m.getListPortate();
                                         System.out.println("Menu Trovato: ");
@@ -478,8 +479,8 @@ public class QLFApplication {
 
 
                                         }
+                                        qLessFood.confermaDatiNuovoOrdine();
 
-                                        qLessFood.nuovoOrdine(date, ti);
                                         int sconto = qLessFood.getUserToken(username);
 
                                         if (sconto != 0) {
