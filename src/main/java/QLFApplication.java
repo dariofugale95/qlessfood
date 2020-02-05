@@ -478,7 +478,7 @@ public class QLFApplication {
 
                                         }
 
-                                        qLessFood.nuovoOrdine(date, ti);
+                                        qLessFood.confermaDatiNuovoOrdine();
                                         int sconto = qLessFood.getUserToken(username);
 
                                         if (sconto != 0) {

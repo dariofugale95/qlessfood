@@ -9,7 +9,8 @@ import java.util.List;
 
 public class Ordine {
 
-    private static int IdOrdine=0;
+    private static int counter=0;
+    private int IdOrdine;
 
     private Time FasciaOraria;
 
@@ -73,16 +74,19 @@ public class Ordine {
     }
 
     public Ordine() {
-        IdOrdine++;
+        counter++;
+        IdOrdine=counter;
     }
 
     public Ordine(Time fasciaOraria, boolean tipoPagamento) {
-        IdOrdine++;
+        counter++;
+        IdOrdine=counter;
         FasciaOraria = fasciaOraria;
         TipoPagamento = tipoPagamento;
     }
 
     public void addPortataToMenu(Portata portata){
+        Portata p = portata;
         listComanda.add(portata);
     }
 
