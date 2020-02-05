@@ -46,21 +46,9 @@ public class Cliente implements Observable {
         NumOrdini = 0;
     }
 
-    public Cliente newCliente(String Username, String Email, String Password) {
-        return null;
-    }
-
-    /**
-     * Incrementa il numero di ordini del cliente
-     *
-     */
     public void setState() {
         this.setNumOrdini(this.getNumOrdini()+1);
         notifyObservers(observers);
-    }
-
-    public void notifyObservers(QLessFood qlf) {
-
     }
 
     public Cliente getState() {
