@@ -59,7 +59,7 @@ public class QLessFood implements Observer {
 		this.listClienti = listClienti;
 	}
 
-	private Collection<Evento> listEventi;
+	private List<Evento> listEventi = new ArrayList<>();
 
 	private Observer observer;
 
@@ -410,7 +410,7 @@ public class QLessFood implements Observer {
 
 	public Evento ricercaEvento(String NomeEvento) {
 		for(Evento evento : listEventi){
-			if(evento.getNome() == NomeEvento){
+			if(evento.getNome().equals(NomeEvento)){
 				return evento;
 			}
 		}

@@ -14,11 +14,11 @@ public class Evento {
 	}
 
 	public Evento(String nome, Date data, int postiTotali, double prezzo, int sconto) {
-		Nome = nome;
-		Data = data;
-		PostiTotali = postiTotali;
-		Prezzo = prezzo;
-		Sconto = sconto;
+		this.Nome = nome;
+		this.Data = data;
+		this.PostiTotali = postiTotali;
+		this.Prezzo = prezzo;
+		this.Sconto = sconto;
 	}
 
 	public String getNome() {
