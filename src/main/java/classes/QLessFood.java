@@ -2,12 +2,7 @@ package classes;
 
 import interfaces.Observable;
 import interfaces.Observer;
-import interfaces.StatoOrdine;
-import org.jdesktop.swingx.tips.TipOfTheDayModel;
 
-import javax.sound.sampled.Port;
-import java.awt.*;
-import java.lang.ref.Cleaner;
 import java.sql.Time;
 import java.util.*;
 import java.util.List;
@@ -277,9 +272,6 @@ public class QLessFood implements Observer {
         return null;
 	}
 
-	public boolean modificaToken(String SceltaModifica) {
-		return false;
-	}
 
 	public boolean modificaNomeToken(int oldNome, int newNome) {
         Token oldToken = ricercaToken(oldNome);

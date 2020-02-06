@@ -4,7 +4,6 @@ import interfaces.StatoOrdine;
 
 import java.sql.Time;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 public class Ordine {
