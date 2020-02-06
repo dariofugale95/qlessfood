@@ -272,9 +272,6 @@ public class QLessFood implements Observer {
         return null;
 	}
 
-	public boolean modificaToken(String SceltaModifica) {
-		return false;
-	}
 
 	public boolean modificaNomeToken(int oldNome, int newNome) {
         Token oldToken = ricercaToken(oldNome);
